@@ -4,7 +4,12 @@
             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
             
+    <!--    
+     Name属性用于定义持久化单元的名字 (name必选,空值也合法);   
+     transaction-type 指定事务类型(可选)    
+	--> 
     <persistence-unit name="myJPA" transaction-type="RESOURCE_LOCAL">
+    <!-- javax.persistence.PersistenceProvider接口的一个实现类(可选) -->  
     <provider>org.hibernate.ejb.HibernatePersistence</provider>  
         <properties>
             <!--配置Hibernate方言 -->
@@ -24,6 +29,26 @@
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
             <property name="javax.persistence.validation.mode" value="none"/>
+            
+           <!-- hibernate的c3p0连接池配置（需要jar包：c3p0-0.9.0.4.jar） -->    
+     
+	       <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>    
+	       <!-- 最小连接数 -->    
+	       <property name="c3p0.min_size" value="5"/>     
+	       <!-- 最大连接数 -->     
+	       <property name="c3p0.max_size" value="30"/>    
+	       <!--最大空闲时间,60秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->     
+	       <property name="c3p0.maxIdleTime" value="60"/>    
+	       <!-- 获得连接的超时时间,如果超过这个时间,会抛出异常，单位毫秒 -->    
+	       <property name="c3p0.timeout" value="1800"/>     
+	       <!-- 最大的PreparedStatement的数量 -->    
+	       <property name="c3p0.max_statements" value="50"/>    
+	       <!-- 每隔120秒检查连接池里的空闲连接 ，单位是秒-->    
+	       <property name="c3p0.idle_test_period" value="120"/>      
+	       <!-- 当连接池里面的连接用完的时候，C3P0一下获取的新的连接数 -->    
+	       <property name="c3p0.acquire_increment" value="1"/>    
+	       <!-- 是否每次都验证连接是否可用 -->    
+	       <property name="c3p0.validate" value="false"/>     
         </properties>
     </persistence-unit>
 </persistence>
