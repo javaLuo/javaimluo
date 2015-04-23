@@ -1,4 +1,4 @@
-var baseip = "192.168.0.233:8080";
+var baseip = "http://192.168.0.233:8080/SSJ1";
 var nowpage = 0;				//记录当前位置在第几页，用于在当前页时，点击导航不重复触发滑动动画
 var lastRunTime = new Date();	//防止滚轮事件重复触发
 var pageimgnum = 2;				//page1图片轮播的下一张图片的编号
@@ -8,6 +8,7 @@ var mp3all = 4;					//记录总共有多少首歌
 var page4aok = 1;				//第4页旋转动画是否已被初始化 1为已初始化
 var facenow = 0;				//标识face窗口是否已显示，0未显示，1显示
 var windowTimer;				//专门用于窗口大小改变时触发的事件的定时器
+var messagetime = 6;			//留言间隔时间
 
 window.onload = function(){
 	//开始页面初始化
@@ -95,6 +96,9 @@ window.onload = function(){
 	
 	//绑定第3页work关闭按钮
 	$("#mywork_close").on("click",closeWork);
+	
+	//绑定发送留言按钮
+	$("#lit_okbtn").on("click",putMessage);
 	//初始化完毕，页面显示
 	$("#boss,#footer").fadeIn(500,startPage1show);
 	$("#daohang").css("visibility","visible").animate({"opacity":"1"},1000);
@@ -590,13 +594,40 @@ function closeWork(){
 	$("#myworkbox").fadeOut(0);
 }
 
+//显示窗口提示
+function bodyMessage(info){
+	$("#body_message").text(info).stop().fadeIn(200).delay(1600).fadeOut(200);
+}
+
 //点击留言的发送按钮，开始ajax留言
 function putMessage(){
-	var info = $("#lit_allwords").html();
-	if(info.length>300){
-		
-	}
+	var info = trim($("#lit_allwords").html());
 	var username = $("#username").val();
-	alert(username+","+info);
 	
+	if(info.length>300){
+		bodyMessage("您说得太多了");
+		return;
+	}else if(info == "请在这里输入内容" || info == ""){
+		bodyMessage("您是不是喜欢装怪");
+		return;
+	}
+	
+	var nowtime = new Date();
+	if(nowtime - messagetime <= 5000){
+		bodyMessage("您说得太快了");
+		return;
+	}else{
+		messagetime = nowtime;
+	}
+	
+	var param = encodeURIComponent(encodeURIComponent(username+"@@"+info));
+	$.ajax({
+		url:baseip + "/main/todo.do",
+		data:"m=putMessage&p="+param,
+		success:putMessageBack
+	})
+}
+
+function putMessageBack(data){
+	alert(data);
 }

@@ -1,5 +1,7 @@
 package cn.lx.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,7 @@ public class MainController
 	@Autowired
 	private MessageService messageservice;
 	
-	@RequestMapping(value = { "todo"})
+	@RequestMapping(value = { "/todo"})
 	@ResponseBody
 	public ReturnMsg<?> todo(
 			@RequestParam(value = "m", required = false) String m,
@@ -53,10 +55,13 @@ public class MainController
 	 * 增加留言的方法
 	 * @param parameters
 	 * @return
+	 * @throws UnsupportedEncodingException 
 	 */
-	private ReturnMsg<Message> putMessage(String parameters) {
+	private ReturnMsg<Message> putMessage(String parameters) throws UnsupportedEncodingException {
 		//s[0]名字、s[1]内容
-		String[] s = parameters.split(AppConfig.PAT);
+		String p = URLDecoder.decode(parameters,"UTF-8");
+		String[] s = p.split(AppConfig.PAT);
+		System.out.println(s[0]+","+s[1]);
 		ReturnMsg<Message> msg = new ReturnMsg<Message>();
 		messageservice.putMessage(s[0],s[1]);
 		msg.setCode(AppConfig.OK_STATUS);

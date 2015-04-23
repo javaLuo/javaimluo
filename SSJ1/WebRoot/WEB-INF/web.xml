@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>welcome.html</welcome-file>
   </welcome-file-list>
   
   <!-- spring核心监听器 -->
@@ -29,7 +29,7 @@
   </servlet>
   <servlet-mapping>
   	<servlet-name>springMVC</servlet-name>
-  	<url-pattern>/*</url-pattern>														<!-- 拦截所有。只拦截.do结尾的请求 -->
+  	<url-pattern>*.do</url-pattern>														<!-- 拦截所有。只拦截.do结尾的请求 -->
   </servlet-mapping>
   
   <!-- 解决spring data jpa 事务懒加载 -->

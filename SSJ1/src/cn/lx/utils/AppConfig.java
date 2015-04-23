@@ -54,7 +54,7 @@ public class AppConfig {
 	/**
 	 *  参数传入分隔符
 	 */
-	public static final String PAT = ",";
+	public static final String PAT = "@@";
 	
 	
 	/**
