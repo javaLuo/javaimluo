@@ -9,7 +9,8 @@ package cn.lx.utils;
 public enum MethodEnum {
 	//发表留言
 	putMessage,
-	
+	//获取留言列表
+	getMessage,
 	test;
 
 	public static MethodEnum getMethod(String methodCode) {

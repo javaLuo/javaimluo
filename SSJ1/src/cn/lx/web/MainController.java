@@ -2,6 +2,8 @@ package cn.lx.web;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +46,8 @@ public class MainController
 			switch (MethodEnum.getMethod(m)) {
 				case putMessage:
 					return putMessage(p);
+				case getMessage:
+					return getMessage(p);
 				default:
 					return Json.toJson(AppUtils.getErrorJson(),JsonFormat.compact());
 			}
@@ -65,12 +69,27 @@ public class MainController
 		String p = URLDecoder.decode(parameters,"UTF-8");
 		String[] s = p.split(AppConfig.PAT);
 		System.out.println(s[0]+","+s[1]);
+		
 		ReturnMsg<Message> msg = new ReturnMsg<Message>();
-		messageservice.putMessage(s[0],s[1]);
+		Message m = messageservice.putMessage(s[0],s[1]);
+		List<Message> l = new ArrayList<Message>();
+		l.add(m);
+		
 		msg.setCode(AppConfig.OK_STATUS);
-		msg.setList(null);
+		msg.setList(l);
+		
 		String json = Json.toJson(msg, JsonFormat.compact());
 		System.out.println(json);
+		return json;
+	}
+	
+	private String getMessage(String parameters){
+		String[] s = parameters.split(AppConfig.PAT);
+		ReturnMsg<Message> msg = new ReturnMsg<Message>();
+		List<Message> l = messageservice.getMessage(s[0],AppConfig.MESSAGE_PAGE);
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(l);
+		String json = Json.toJson(msg, JsonFormat.compact());
 		return json;
 	}
 }

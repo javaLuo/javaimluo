@@ -306,6 +306,16 @@ function liWordBoxShow(){
 		$("#litwordclose").animate({"top":"-2em","opacity":"show"},600);	
 	});
 	$("body").unbind("mousewheel");
+	
+	var $lr = $("#lit_boxr");
+	if($lr.find(".iload").length>0){	//说明没有加载过，开始加载第1页的留言数据
+		$.ajax({
+			url:"main/todo.do",
+			type:"get",
+			data:"m=getMessage&p=0",
+			success:getMessageBack
+		})
+	}
 }
 
 //关闭小纸条窗口
@@ -595,9 +605,14 @@ function closeWork(){
 }
 
 //显示窗口提示
+var messagetimer;
 function bodyMessage(info){
 	$("#body_m").text(info);
-	$("#body_message").stop().fadeIn(200).delay(1600).fadeOut(200);
+	$("#body_message").stop().fadeIn(200);
+	clearTimeout(messagetimer);
+	messagetimer = setTimeout(function(){
+		$("#body_message").fadeOut(200);
+	},1600);
 }
 
 //点击留言的发送按钮，开始ajax留言
@@ -622,7 +637,7 @@ function putMessage(){
 	}
 	
 	var param = encodeURIComponent(encodeURIComponent(username+"@@"+info));
-	 
+	 bodyMessage("正在飞...");
 	$.ajax({
 		url:"main/todo.do",
 		type:"get",
@@ -634,6 +649,47 @@ function putMessage(){
 	})
 }
 
+
+/*-------------------------------- 各种回调函数  ----------------------------------*/
+
+
+//留言模板
+var messagehtml = '<div class="lit_userwords"><div class="lit_uw_w">@info@</div><div class="lit_uw_n l_font80 l_textright">@username@</div><div class="lit_uw_t l_font80 l_textright">@time@</div></div>';
+
+//发表留言成功的回调函数
 function putMessageBack(data){
+	var json = JSON.parse(data);
 	bodyMessage("留言成功");
+	var str = messagehtml.replace(/@info@/g,json.list[0].info).replace(/@username@/g,json.list[0].username).replace(/@time@/g,json.list[0].time);
+	$(str).prependTo($("#lit_boxr"));
+	$("#lit_boxr").scrollTop(0);
 }
+
+//获取留言列表的回调函数
+function getMessageBack(data){
+	var json = JSON.parse(data);
+	
+	$("#lit_boxr").find(".iload").remove();
+	
+	if(json.list.length<=0){	//没有更多了
+		
+	}else{
+		var str = "";
+		for(var i=0;i<json.list.length;i++){
+			str += messagehtml.replace(/@info@/g,json.list[i].info).replace(/@username@/g,json.list[i].username).replace(/@time@/g,json.list[i].time);
+		}
+		$(str).appendTo($("#lit_boxr"));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,4 +28,9 @@ public class AppConfig {
 	 */
 	public static final String PAT = "@@";
 	
+	/**
+	 * 留言列表每次加载几条
+	 * */
+	public static final int MESSAGE_PAGE = 5;
+	
 }

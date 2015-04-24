@@ -1128,6 +1128,15 @@ p{
 	border-radius:.3em;
 	box-shadow:0 0 5px #fff;
 }
+.iload{
+	position:absolute;
+	width:1.2em;
+	height:1.2em;
+	top:50%;
+	left:50%;
+	margin-top:-.6em;
+	margin-left:-.6em;
+}
 /*///////////////*/
 /*//css3动画相关//*/
 /*///////////////*/
