@@ -596,7 +596,8 @@ function closeWork(){
 
 //显示窗口提示
 function bodyMessage(info){
-	$("#body_message").text(info).stop().fadeIn(200).delay(1600).fadeOut(200);
+	$("#body_m").text(info);
+	$("#body_message").stop().fadeIn(200).delay(1600).fadeOut(200);
 }
 
 //点击留言的发送按钮，开始ajax留言
@@ -621,13 +622,18 @@ function putMessage(){
 	}
 	
 	var param = encodeURIComponent(encodeURIComponent(username+"@@"+info));
+	 
 	$.ajax({
-		url:baseip + "/main/todo.do",
+		url:"main/todo.do",
+		type:"get",
 		data:"m=putMessage&p="+param,
-		success:putMessageBack
+		success:putMessageBack,
+		error: function(){
+			bodyMessage("留言失败");
+        }
 	})
 }
 
 function putMessageBack(data){
-	alert(data);
+	bodyMessage("留言成功");
 }

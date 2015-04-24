@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.nutz.json.Json;
+import org.nutz.json.JsonFormat;
 
 import cn.lx.bean.Message;
 import cn.lx.service.MessageService;
@@ -19,6 +21,7 @@ import cn.lx.utils.AppConfig;
 import cn.lx.utils.AppUtils;
 import cn.lx.utils.ReturnMsg;
 import cn.lx.utils.MethodEnum;
+
 
 @Controller
 @RequestMapping("/main")
@@ -29,7 +32,7 @@ public class MainController
 	
 	@RequestMapping(value = { "/todo"})
 	@ResponseBody
-	public ReturnMsg<?> todo(
+	public String todo(
 			@RequestParam(value = "m", required = false) String m,
 			@RequestParam(value = "p", required = false) String p,
 			HttpSession session, HttpServletRequest request){
@@ -42,13 +45,13 @@ public class MainController
 				case putMessage:
 					return putMessage(p);
 				default:
-					return AppUtils.getErrorJson();
+					return Json.toJson(AppUtils.getErrorJson(),JsonFormat.compact());
 			}
 			
 		} catch (Exception e) {
-			System.out.println("访问出错......" + e.getMessage());
+			System.out.println("访问出错" + e.getMessage());
 		}
-		return AppUtils.getFieldJson();
+		return Json.toJson(AppUtils.getFieldJson(),JsonFormat.compact());
 	}
 	
 	/**
@@ -57,7 +60,7 @@ public class MainController
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
-	private ReturnMsg<Message> putMessage(String parameters) throws UnsupportedEncodingException {
+	private String putMessage(String parameters) throws UnsupportedEncodingException {
 		//s[0]名字、s[1]内容
 		String p = URLDecoder.decode(parameters,"UTF-8");
 		String[] s = p.split(AppConfig.PAT);
@@ -66,7 +69,9 @@ public class MainController
 		messageservice.putMessage(s[0],s[1]);
 		msg.setCode(AppConfig.OK_STATUS);
 		msg.setList(null);
-		return msg;
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
 	}
 }
 

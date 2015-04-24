@@ -1113,18 +1113,20 @@ p{
 .body_message{
 	position:fixed;
 	height:2em;
-	min-width:1em;
-	margin:auto 0;
+	width:100%;
 	top:50%;
 	margin-top:-1em;
-	background-color:#000;
-	border-radius:.5em;
-	display:none;
-	padding:.2em;
 	font-size:1em;
 	color:#fefefe;
 	text-align:center;
-	display:block;
+	display:none;
+	z-index:1200;
+}
+.body_m{
+	padding:.5em 1em .5em 1em;
+	background-color:#000;
+	border-radius:.3em;
+	box-shadow:0 0 5px #fff;
 }
 /*///////////////*/
 /*//css3动画相关//*/
