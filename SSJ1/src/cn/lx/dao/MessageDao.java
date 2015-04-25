@@ -12,7 +12,7 @@ import cn.lx.bean.Message;
 public interface MessageDao extends JpaRepository<Message, Integer>
 {
 
-	@Query(value="select * from (select t.* from gl_minescxx t where mineid = ?1 and shsj is not null order by shsj desc) where rownum=1",nativeQuery=true)
+	@Query(value="select * from message order by time desc LIMIT ?1,?2",nativeQuery=true)
 	List<Message> getMessage(int parseInt, int messagePage);
 
 }

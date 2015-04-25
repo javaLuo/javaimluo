@@ -1137,6 +1137,20 @@ p{
 	margin-top:-.6em;
 	margin-left:-.6em;
 }
+.loadmore{
+	width:98%;
+	height:2em;
+	left:1%;
+	font-size:.8em;
+	line-height:2em;
+	text-align:center;
+	color:#AAF;
+	display:none;
+	border-radius:.5em;
+}
+.loadmore:hover{
+	background-color:rgb(0,0,0);
+}
 /*///////////////*/
 /*//css3动画相关//*/
 /*///////////////*/

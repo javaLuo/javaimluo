@@ -99,6 +99,9 @@ window.onload = function(){
 	
 	//绑定发送留言按钮
 	$("#lit_okbtn").on("click",putMessage);
+	
+	//绑定留言加载更多按钮
+	$("#messageloadmore").on("click",getMoreMessage);
 	//初始化完毕，页面显示
 	$("#boss,#footer").fadeIn(500,startPage1show);
 	$("#daohang").css("visibility","visible").animate({"opacity":"1"},1000);
@@ -649,28 +652,53 @@ function putMessage(){
 	})
 }
 
+//点击留言板加载更多按钮
+function getMoreMessage(){
+	var $m = $("#messageloadmore");
+	var mtext = $m.text();
+	if(mtext!="显示更多"){
+		return;
+	}
+	
+	var pageNow = $(".lit_userwords","#lit_boxr").length;
+		$m.text("正在加载...");
+		$.ajax({
+			url:"main/todo.do",
+			type:"get",
+			data:"m=getMessage&p="+pageNow,
+			success:getMessageBack,
+			error:function(){
+				bodyMessage("加载失败");
+				$m.text("显示更多");
+			}
+		})
+}
 
 /*-------------------------------- 各种回调函数  ----------------------------------*/
 
 
 //留言模板
-var messagehtml = '<div class="lit_userwords"><div class="lit_uw_w">@info@</div><div class="lit_uw_n l_font80 l_textright">@username@</div><div class="lit_uw_t l_font80 l_textright">@time@</div></div>';
+var messagehtml = '<div class="lit_userwords" style="display:none"><div class="lit_uw_w">@info@</div><div class="lit_uw_n l_font80 l_textright">@username@</div><div class="lit_uw_t l_font80 l_textright">@time@</div></div>';
 
 //发表留言成功的回调函数
 function putMessageBack(data){
 	var json = JSON.parse(data);
 	bodyMessage("留言成功");
 	var str = messagehtml.replace(/@info@/g,json.list[0].info).replace(/@username@/g,json.list[0].username).replace(/@time@/g,json.list[0].time);
-	$(str).prependTo($("#lit_boxr"));
+	$(str).prependTo($("#lit_boxr")).fadeIn(300);
 	$("#lit_boxr").scrollTop(0);
 }
 
 //获取留言列表的回调函数
 function getMessageBack(data){
+
 	var json = JSON.parse(data);
-	
+	var $m = $("#messageloadmore");
 	$("#lit_boxr").find(".iload").remove();
-	
+	$m.fadeIn(300);
+	if(json.list.length<5){
+		$m.text("已全部加载完毕");
+	}
 	if(json.list.length<=0){	//没有更多了
 		
 	}else{
@@ -678,7 +706,9 @@ function getMessageBack(data){
 		for(var i=0;i<json.list.length;i++){
 			str += messagehtml.replace(/@info@/g,json.list[i].info).replace(/@username@/g,json.list[i].username).replace(/@time@/g,json.list[i].time);
 		}
-		$(str).appendTo($("#lit_boxr"));
+
+		$(str).insertBefore($m).fadeIn(300);
+		$m.text("显示更多");
 	}
 }
 

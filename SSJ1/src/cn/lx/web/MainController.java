@@ -83,6 +83,11 @@ public class MainController
 		return json;
 	}
 	
+	/**
+	 * 分页获取留言列表
+	 * @param parameters
+	 * @return
+	 */
 	private String getMessage(String parameters){
 		String[] s = parameters.split(AppConfig.PAT);
 		ReturnMsg<Message> msg = new ReturnMsg<Message>();
