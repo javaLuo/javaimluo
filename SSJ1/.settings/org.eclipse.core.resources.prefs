@@ -1,4 +1,4 @@
-#Fri Apr 24 16:50:24 CST 2015
+#Sun Apr 26 14:35:55 CST 2015
 eclipse.preferences.version=1
 encoding//WebRoot/index.html=UTF-8
 encoding//WebRoot/kernel/index/css/index.css=UTF-8
@@ -6,5 +6,7 @@ encoding//WebRoot/kernel/luo/luo.css=UTF-8
 encoding//WebRoot/welcome.html=UTF-8
 encoding//src/cn/lx/dao=UTF-8
 encoding//src/cn/lx/dao/MessageDao.java=UTF-8
+encoding//src/cn/lx/dao/MovieDao.java=UTF-8
+encoding//src/cn/lx/dao/MovieImgsDao.java=UTF-8
 encoding//src/cn/lx/utils=UTF-8
 encoding/WebRoot=UTF-8

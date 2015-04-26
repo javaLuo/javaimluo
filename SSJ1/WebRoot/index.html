@@ -60,40 +60,37 @@
             <div id="p2_movie" class="p2_divs">
             	<div id="movielr" class="movelr">
                 	<div id="movieinfol" class="movieinfol movieinfol_media">
-                    	<img id="movieinfo_img" class="movieinfo_img" src="../../我的图片/9.jpg"/><br/>
-                        <div class="movieinfo_name l_textcenter l_font200"><i>什么什么电影</i></div>
+                    	<img id="movieinfo_img" class="movieinfo_img" src="#"/><br/>
+                        <div class="movieinfo_name l_textcenter l_font200"><i id="movieinfo_name"></i></div>
                     </div>
                     <div id="movieinfor" class="movieinfor movieinfor_media">
                     	<div class="movieinfo_div">
                             <span class="movieinfo_span1">电影简介：</span><br/>
-                            <span class="movieinfo_span2 moviemargin">数据</span>
+                            <span id="movieinfo_info" class="movieinfo_span2 moviemargin"></span>
                         </div>
                         <div class="movieinfo_div">
                             <span class="movieinfo_span1">电影类型：</span>
-                            <span class="movieinfo_span2">数据</span>
+                            <span id="movieinfo_type" class="movieinfo_span2"></span>
                         </div>
                     	<div class="movieinfo_div">
                             <span class="movieinfo_span1">推荐星级：</span>
-                            <span class="movieinfo_span2">★★★★★</span>
+                            <span id="movieinfo_star" class="movieinfo_span2"></span>
                         </div>
                         <div class="movieinfo_div">
                             <span class="movieinfo_span1">我的评语：</span><br/>
-                            <span class="movieinfo_span2 moviemargin">数据</span>
+                            <span id="movieinfo_mytalk" class="movieinfo_span2 moviemargin"></span>
                         </div>
                         <div class="movieinfo_div">
                             <span class="movieinfo_span1">下载地址：</span>
-                            <span class="movieinfo_span2"><a class="l_a1" href="http://www.baidu.com">http://www.baidu.com</a></span>
+                            <span class="movieinfo_span2"><a id="movieinfo_downlink" class="l_a1" href="#"></a></span>
                         </div>
-                        <div class="movieinfo_div">
+                        <div id="movieinfo_jz" class="movieinfo_div">
                             <span class="movieinfo_span1">剧照：</span><br/>
-                            <img class="movieinfo_photo" src="../../我的图片/6.jpeg"/>
-                            <img class="movieinfo_photo" src="../../我的图片/6.jpeg"/>
-                            <img class="movieinfo_photo" src="../../我的图片/6.jpeg"/>
                         </div>
                     </div>
                 </div>
                 <div id="movedh" class="movedh l_noselect">
-
+					<img id="movie_more" src='#' class='movecardbtn'  onClick="movieloadmore()"/>
                 </div>
             </div>
             <!-- 电影div结束 -->

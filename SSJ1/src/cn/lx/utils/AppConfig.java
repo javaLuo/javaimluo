@@ -33,4 +33,9 @@ public class AppConfig {
 	 * */
 	public static final int MESSAGE_PAGE = 5;
 	
+	/**
+	 * 基础访问路径
+	 * */
+	public static final String BASEPATH = "http://localhost:8080/SSJ1";
+	
 }

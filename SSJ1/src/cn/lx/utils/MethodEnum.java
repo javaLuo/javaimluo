@@ -11,6 +11,11 @@ public enum MethodEnum {
 	putMessage,
 	//获取留言列表
 	getMessage,
+	//获取电影列表
+	getMovieList,
+	//获取电影详细信息
+	getMovieInfo,
+	
 	test;
 
 	public static MethodEnum getMethod(String methodCode) {

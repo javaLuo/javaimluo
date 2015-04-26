@@ -468,6 +468,9 @@ function mytingbtnClick(the){
 	if(tid=="myting_movie"){
 		$("#p2_movie").stop().fadeIn(300);
 		initMovieDivHeight();
+		if($("#movedh").find(".movecard").length<=0){
+			getMovieList(0);
+		}
 	}else if(tid=="myting_game"){
 		$("#p2_game").stop().fadeIn(300);
 	}else if(tid=="myting_article"){
@@ -475,6 +478,25 @@ function mytingbtnClick(the){
 	}else if(tid=="myting_game"){
 		$("#p2_game").stop().fadeIn(300);
 	}
+}
+
+//加载更多movie列表
+function getMovieList(pageNow){
+		$.ajax({
+			url:"main/todo.do",
+			type:"get",
+			data:"m=getMovieList&p="+pageNow,
+			success:getMovieListBack,
+			error:function(){
+				bodyMessage("加载失败");
+			}
+		})
+}
+
+//点击加载更多电影的按钮
+function movieloadmore(){
+	var pagenow = $("#movedh").find(".movecard").length;
+	getMovieList(pagenow);
 }
 
 //禁止某些部件上的滚轮事件
@@ -674,6 +696,20 @@ function getMoreMessage(){
 		})
 }
 
+//点击具体的电影
+function clickmovie(id){
+	$("#movelr").css("display","none").stop().fadeIn(500);
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getMovieInfo&p="+id,
+		success:getMovieInfoBack,
+		error:function(){
+			bodyMessage("获取电影信息失败");
+		}
+	})
+}
+
 /*-------------------------------- 各种回调函数  ----------------------------------*/
 
 
@@ -712,7 +748,55 @@ function getMessageBack(data){
 	}
 }
 
+//电影列表模版
+var moviehtml = "<img src='@img@' class='movecard reflex itiltnone idistance5' onload='initCanvas(this)' onClick='clickmovie(@id@)'>";
 
+//获取电影列表的回调函数
+function getMovieListBack(data){
+	var json = JSON.parse(data);
+	var $m = $("#movie_more");
+	
+	if(json.list.length<15){
+		$m.css("display","none");
+	}
+	if(json.list.length<=0){	//没有更多了
+		
+	}else{
+		var str = "";
+		for(var i=0;i<json.list.length;i++){
+			str += moviehtml.replace(/@img@/g,json.list[i].imgpath).replace(/@id@/g,json.list[i].id);
+		}
+		alert(str);
+		$(str).insertBefore($m).fadeIn(300);
+
+	}
+}
+
+//获取具体的电影信息
+function getMovieInfoBack(data){
+	var json = JSON.parse(data);
+	
+	$("#movieinfo_img").attr("src",json.list[0].imgpath);	//封面图片
+	$("#movieinfo_name").text(json.list[0].title);			//电影名字
+	$("#movieinfo_info").text(json.list[0].info);			//电影简介
+	$("#movieinfo_type").text(json.list[0].type);			//类型
+	
+	var star = parseInt(json.list[0].star);
+	var stars = "";
+	for(var i=0;i<star;i++){
+		stars+="★";
+	}
+	$("#movieinfo_star").text(stars);						//星级
+	$("#movieinfo_mytalk").text(json.list[0].mytalk);		//我的评语
+	$("#movieinfo_downlink").attr("href",json.list[0].downlink).text(json.list[0].downinfo);
+	
+	var imghtml = '<img class="movieinfo_photo" src="@imgpath@"/>';
+	var str = "";
+	for(var i=0;i<json.list[0].movieimgs.length;i++){
+		str+=imghtml.replace(/@imgpath@/g,json.list[0].movieimgs[i].imgpath);
+	}
+	$("#movieinfo_jz").append($(str));
+}
 
 
 

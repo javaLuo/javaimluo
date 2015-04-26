@@ -742,7 +742,7 @@ p{
 	left:5%;
 	top:40px;
 	overflow-X:auto;
-	display:block;
+	display:none;
 }
 .movedh{
 	position:absolute;
@@ -752,6 +752,13 @@ p{
 	bottom:3em;
 }
 .movecard{
+	display:inline-block;
+	width:6em;
+	height:10em;
+	margin:0 .5em 0 .5em;
+	cursor:pointer;
+}
+.movecardbtn{
 	display:inline-block;
 	width:6em;
 	height:10em;
