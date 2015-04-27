@@ -477,9 +477,24 @@ function mytingbtnClick(the){
 		$("#p2_article").stop().fadeIn(300);
 	}else if(tid=="myting_game"){
 		$("#p2_game").stop().fadeIn(300);
+		if($("#gamebox").find(".game_i").length<=0){
+			getGameList();
+		}
 	}
 }
 
+//加载全部game列表
+function getGameList(){
+		$.ajax({
+			url:"main/todo.do",
+			type:"get",
+			data:"m=getGameList&p=0",
+			success:getGameListBack,
+			error:function(){
+				bodyMessage("加载失败");
+			}
+		})
+}
 //加载更多movie列表
 function getMovieList(pageNow){
 		$.ajax({
@@ -549,16 +564,6 @@ function wenzhangOpen(){
 	});	
 }
 
-//点击游戏列表，打开游戏详细div
-function gameOpen(){
-	var $youxi = $("#youxi");
-
-	$youxi.animate({"left":"0"},300,function(){
-				$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
-				$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
-				$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
-	});	
-}
 
 //点击游戏关闭按钮，关闭游戏详细div
 function gameClose(){
@@ -699,6 +704,7 @@ function getMoreMessage(){
 //点击具体的电影
 function clickmovie(id){
 	$("#movielr").css("display","none").stop().fadeIn(500);
+	if($("#movieinfo_id").val() == id)return;
 	$.ajax({
 		url:"main/todo.do",
 		type:"get",
@@ -776,10 +782,11 @@ function getMovieListBack(data){
 function getMovieInfoBack(data){
 	var json = JSON.parse(data);
 	
+	$("#movieinfo_id").val(json.list[0].id);						//ID
 	$("#movieinfo_img").attr("src",baseip+json.list[0].imgpath);	//封面图片
-	$("#movieinfo_name").text(json.list[0].title);			//电影名字
-	$("#movieinfo_info").text(json.list[0].info);			//电影简介
-	$("#movieinfo_type").text(json.list[0].type);			//类型
+	$("#movieinfo_name").text(json.list[0].title);					//电影名字
+	$("#movieinfo_info").text(json.list[0].info);					//电影简介
+	$("#movieinfo_type").text(json.list[0].type);					//类型
 	
 	var star = parseInt(json.list[0].star);
 	var stars = "";
@@ -798,12 +805,48 @@ function getMovieInfoBack(data){
 	$("#movieinfo_jz").append($(str));
 }
 
+//加载全部游戏列表回调函数
+function getGameListBack(data){
+	var json = JSON.parse(data);
+	
+	var thehtml = '<div class="game_i articlelist articlelist_media l_cursor opacitytran" onClick="gameOpen(@id@)"><div class="article_info1"><span class="ar_info1">@name@</span></div></div>';
+    var str = "";           	
+    for(var i=0;i<json.list.length;i++){
+    	str+=thehtml.replace(/@id@/g,json.list[i].id).replace(/@name@/g,json.list[i].name);
+    }
+    var $i = $(".iload","#gamebox");
+    $i.css("display","none")
+	$(str).insertBefore($i);
+}
 
+//点击游戏列表，打开游戏详细div
+function gameOpen(id){
+	var $youxi = $("#youxi");
 
+	$youxi.animate({"left":"0"},300,function(){
+				$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
+				$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
+				$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
+	});	
+	
+	if($("#movieinfo_id").val() == id)return;
+	
+	//先清空信息
+	
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=gameOpen&p="+id,
+		success:gameOpenBack,
+		error:function(){
+			bodyMessage("获取游戏信息失败");
+		}
+	})
+}
 
-
-
-
+function gameOpenBack(data){
+	var json = JSON.parse(data);
+}
 
 
 

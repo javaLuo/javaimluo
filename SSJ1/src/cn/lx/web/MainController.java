@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 
+import cn.lx.bean.Game;
 import cn.lx.bean.Message;
 import cn.lx.bean.Movie;
 import cn.lx.bean.MovieImgs;
 import cn.lx.bean.MoviePojo1;
+import cn.lx.service.GameService;
 import cn.lx.service.MessageService;
 import cn.lx.service.MovieImgsService;
 import cn.lx.service.MovieService;
@@ -39,7 +41,8 @@ public class MainController
 	@Autowired
 	private MovieService movieservice;
 	@Autowired
-	private MovieImgsService movieimgsservice;
+	private GameService gameservice;
+
 	
 	@RequestMapping(value = { "/todo"})
 	@ResponseBody
@@ -61,6 +64,8 @@ public class MainController
 					return getMovieList(p);
 				case getMovieInfo://获取电影详细信息
 					return getMovieInfo(p);
+				case getGameList://获取全部游戏列表
+					return getGameList(p);
 				default:
 					return Json.toJson(AppUtils.getErrorJson(),JsonFormat.compact());
 			}
@@ -136,9 +141,20 @@ public class MainController
 		
 		List<Movie> m = movieservice.getMovieInfo(s[0]);
 
-		//List<MovieImgs> mi = movieimgsservice.getMovieImgs(s[0]);
-		//m.setMovieimgs(mi);
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
 
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取全部游戏列表
+	 * */
+	private String getGameList(String p){
+		ReturnMsg<Game> msg = new ReturnMsg<Game>();
+		List<Game> m = gameservice.getGameList();
 		
 		msg.setCode(AppConfig.OK_STATUS);
 		msg.setList(m);

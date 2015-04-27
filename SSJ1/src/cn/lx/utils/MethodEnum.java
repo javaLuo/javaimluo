@@ -15,6 +15,8 @@ public enum MethodEnum {
 	getMovieList,
 	//获取电影详细信息
 	getMovieInfo,
+	//获取全部游戏列表
+	getGameList,
 	
 	test;
 
