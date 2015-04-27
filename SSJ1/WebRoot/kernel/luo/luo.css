@@ -337,3 +337,8 @@ div{
     word-wrap: break-word;
     white-space: pre-wrap; 
 }
+.l_imgback{/* 图片加载背景 */
+	background-image:url("../index/img/onload.gif");
+	background-position: center;
+	background-repeat: no-repeat;
+}

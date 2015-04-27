@@ -15,6 +15,7 @@ public interface MovieImgsDao extends JpaRepository<MovieImgs, Integer>
 {
 
 	@Query(value="select * from movie_imgs where movie_id=?1 order by ordernum asc",nativeQuery=true)
+	//@Query(value="select * from message where id=?1",nativeQuery=true)
 	List<MovieImgs> getMovieImgs(Integer movieid);
 
 }

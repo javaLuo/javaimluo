@@ -1,4 +1,4 @@
-var baseip = "http://192.168.0.233:8080/SSJ1";
+var baseip = "http://localhost:8080/SSJ1";
 var nowpage = 0;				//记录当前位置在第几页，用于在当前页时，点击导航不重复触发滑动动画
 var lastRunTime = new Date();	//防止滚轮事件重复触发
 var pageimgnum = 2;				//page1图片轮播的下一张图片的编号
@@ -698,7 +698,7 @@ function getMoreMessage(){
 
 //点击具体的电影
 function clickmovie(id){
-	$("#movelr").css("display","none").stop().fadeIn(500);
+	$("#movielr").css("display","none").stop().fadeIn(500);
 	$.ajax({
 		url:"main/todo.do",
 		type:"get",
@@ -749,7 +749,7 @@ function getMessageBack(data){
 }
 
 //电影列表模版
-var moviehtml = "<img src='@img@' class='movecard reflex itiltnone idistance5' onload='initCanvas(this)' onClick='clickmovie(@id@)'>";
+var moviehtml = "<img src='@img@' class='movecard l_imgback reflex itiltnone idistance5' onload='initCanvas(this)' onClick='clickmovie(@id@)'>";
 
 //获取电影列表的回调函数
 function getMovieListBack(data){
@@ -766,8 +766,8 @@ function getMovieListBack(data){
 		for(var i=0;i<json.list.length;i++){
 			str += moviehtml.replace(/@img@/g,json.list[i].imgpath).replace(/@id@/g,json.list[i].id);
 		}
-		alert(str);
-		$(str).insertBefore($m).fadeIn(300);
+
+		$(str).insertBefore($m);
 
 	}
 }
@@ -776,7 +776,7 @@ function getMovieListBack(data){
 function getMovieInfoBack(data){
 	var json = JSON.parse(data);
 	
-	$("#movieinfo_img").attr("src",json.list[0].imgpath);	//封面图片
+	$("#movieinfo_img").attr("src",baseip+json.list[0].imgpath);	//封面图片
 	$("#movieinfo_name").text(json.list[0].title);			//电影名字
 	$("#movieinfo_info").text(json.list[0].info);			//电影简介
 	$("#movieinfo_type").text(json.list[0].type);			//类型
@@ -790,10 +790,10 @@ function getMovieInfoBack(data){
 	$("#movieinfo_mytalk").text(json.list[0].mytalk);		//我的评语
 	$("#movieinfo_downlink").attr("href",json.list[0].downlink).text(json.list[0].downinfo);
 	
-	var imghtml = '<img class="movieinfo_photo" src="@imgpath@"/>';
+	var imghtml = '<img class="movieinfo_photo l_imgback" src="@imgpath@"/>';
 	var str = "";
 	for(var i=0;i<json.list[0].movieimgs.length;i++){
-		str+=imghtml.replace(/@imgpath@/g,json.list[0].movieimgs[i].imgpath);
+		str+=imghtml.replace(/@imgpath@/g,baseip+json.list[0].movieimgs[i].imgpath);
 	}
 	$("#movieinfo_jz").append($(str));
 }

@@ -43,8 +43,8 @@ public class MovieService{
 	/**
 	 * 获取电影详细信息
 	 * */
-	public Movie getMovieInfo(String id)
+	public List<Movie> getMovieInfo(String id)
 	{
-		return md.getOne(Integer.parseInt(id));
+		return md.getOneMovie(Integer.parseInt(id));
 	}
 }

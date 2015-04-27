@@ -1,7 +1,5 @@
 package cn.lx.bean;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ public class MovieImgs
 	
 	//关联的电影表ID
 	@Column(name = "MOVIE_ID")
-	private String movie_id;
+	private Integer movie_id;
 	
 	//图片路径
 	@Column(name = "IMGPATH")
@@ -29,7 +27,7 @@ public class MovieImgs
 	
 	//排序编号
 	@Column(name = "ORDERNUM")
-	private Date ordernum;
+	private Integer ordernum;
 
 	public Integer getId()
 	{
@@ -41,12 +39,12 @@ public class MovieImgs
 		this.id = id;
 	}
 
-	public String getMovie_id()
+	public Integer getMovie_id()
 	{
 		return movie_id;
 	}
 
-	public void setMovie_id(String movieId)
+	public void setMovie_id(Integer movieId)
 	{
 		movie_id = movieId;
 	}
@@ -61,16 +59,16 @@ public class MovieImgs
 		this.imgpath = imgpath;
 	}
 
-	public Date getOrdernum()
+	public Integer getOrdernum()
 	{
 		return ordernum;
 	}
 
-	public void setOrdernum(Date ordernum)
+	public void setOrdernum(Integer ordernum)
 	{
 		this.ordernum = ordernum;
 	}
-	
+
 	
 
 }

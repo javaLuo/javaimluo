@@ -14,6 +14,9 @@ public interface MovieDao extends JpaRepository<Movie, Integer>
 {
 
 	@Query(value="select * from movie order by id asc LIMIT ?1,?2",nativeQuery=true)
-	List<Movie> getMovieList(int parseInt, int messagePage);
+	List<Movie> getMovieList(int pagenow, int messagePage);
+
+	@Query(value="select * from movie where id=?1",nativeQuery=true)
+	List<Movie> getOneMovie(int id);
 
 }

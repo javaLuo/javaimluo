@@ -134,21 +134,18 @@ public class MainController
 		String[] s = p.split(AppConfig.PAT);
 		ReturnMsg<Movie> msg = new ReturnMsg<Movie>();
 		
-		//Movie m = movieservice.getMovieInfo(s[0]);
-		
-		List<MovieImgs> mi = movieimgsservice.getMovieImgs(s[0]);
-		//m.setMovieimgs(mi);
-		System.out.println(Json.toJson(mi,JsonFormat.compact()));
-		//List<Movie> l = new ArrayList<Movie>();
-		//l.add(m);
-		
-		//msg.setCode(AppConfig.OK_STATUS);
-		//msg.setList(l);
+		List<Movie> m = movieservice.getMovieInfo(s[0]);
 
-		//String json = Json.toJson(msg, JsonFormat.compact());
-		//System.out.println(json);
-		//return json;
-		return null;
+		//List<MovieImgs> mi = movieimgsservice.getMovieImgs(s[0]);
+		//m.setMovieimgs(mi);
+
+		
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
 	}
 }
 
