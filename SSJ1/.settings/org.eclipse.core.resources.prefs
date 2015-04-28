@@ -1,13 +1,17 @@
-#Mon Apr 27 21:20:59 CST 2015
+#Tue Apr 28 16:53:33 CST 2015
 eclipse.preferences.version=1
 encoding//WebRoot/index.html=UTF-8
 encoding//WebRoot/kernel/index/css/index.css=UTF-8
+encoding//WebRoot/kernel/index/css/welcome.css=UTF-8
 encoding//WebRoot/kernel/luo/luo.css=UTF-8
 encoding//WebRoot/welcome.html=UTF-8
 encoding//src/cn/lx/dao=UTF-8
+encoding//src/cn/lx/dao/ArticleDao.java=UTF-8
 encoding//src/cn/lx/dao/GameDao.java=UTF-8
 encoding//src/cn/lx/dao/MessageDao.java=UTF-8
 encoding//src/cn/lx/dao/MovieDao.java=UTF-8
 encoding//src/cn/lx/dao/MovieImgsDao.java=UTF-8
+encoding//src/cn/lx/dao/MyWorkBodyDao.java=UTF-8
+encoding//src/cn/lx/dao/MyWorkDao.java=UTF-8
 encoding//src/cn/lx/utils=UTF-8
 encoding/WebRoot=UTF-8

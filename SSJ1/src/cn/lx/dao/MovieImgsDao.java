@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import cn.lx.bean.Movie;
 import cn.lx.bean.MovieImgs;
-import cn.lx.bean.MoviePojo1;
 
 @Repository
 public interface MovieImgsDao extends JpaRepository<MovieImgs, Integer>

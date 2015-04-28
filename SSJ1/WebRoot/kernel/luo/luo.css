@@ -327,6 +327,17 @@ div{
 	color:#fefefe;
 	text-decoration:underline;
 }
+
+.l_a2{
+	border:none;
+	color:#101010;
+	text-decoration:none;
+}
+.l_a2:hover{
+	color:#101010;
+	text-decoration:underline;
+}
+
 .l_nowarp{/* 禁止换行 */
 	white-space:nowrap;
 	overflow:hidden;

@@ -102,6 +102,10 @@ window.onload = function(){
 	
 	//绑定留言加载更多按钮
 	$("#messageloadmore").on("click",getMoreMessage);
+	
+	//ajax获取第3页列表
+	getAllWorks();
+	
 	//初始化完毕，页面显示
 	$("#boss,#footer").fadeIn(500,startPage1show);
 	$("#daohang").css("visibility","visible").animate({"opacity":"1"},1000);
@@ -465,17 +469,18 @@ function mytingbtnClick(the){
 	$(".p2_divs,#page2show").stop().fadeOut(300);
 	var tid = the.getAttribute("id");
 	
-	if(tid=="myting_movie"){
+	if(tid=="myting_movie"){//点击电影
 		$("#p2_movie").stop().fadeIn(300);
 		initMovieDivHeight();
 		if($("#movedh").find(".movecard").length<=0){
 			getMovieList(0);
 		}
-	}else if(tid=="myting_game"){
-		$("#p2_game").stop().fadeIn(300);
-	}else if(tid=="myting_article"){
+	}else if(tid=="myting_article"){//点击文章
 		$("#p2_article").stop().fadeIn(300);
-	}else if(tid=="myting_game"){
+		if($("#articlebox").find(".articlelist").length<=0){
+			getArticleList();
+		}
+	}else if(tid=="myting_game"){//点击游戏
 		$("#p2_game").stop().fadeIn(300);
 		if($("#gamebox").find(".game_i").length<=0){
 			getGameList();
@@ -483,12 +488,25 @@ function mytingbtnClick(the){
 	}
 }
 
+//加载全部文章列表
+function getArticleList(){
+		$.ajax({
+			url:"main/todo.do",
+			type:"get",
+			data:"m=getArticleList&p=",
+			success:getArticleListBack,
+			error:function(){
+				bodyMessage("加载失败");
+			}
+		})
+}
+
 //加载全部game列表
 function getGameList(){
 		$.ajax({
 			url:"main/todo.do",
 			type:"get",
-			data:"m=getGameList&p=0",
+			data:"m=getGameList&p=",
 			success:getGameListBack,
 			error:function(){
 				bodyMessage("加载失败");
@@ -553,18 +571,6 @@ function wenzhangClose(){
 	});	
 }
 
-//点击文章列表，打开文章详细div
-function wenzhangOpen(){
-	var $wenzhang = $("#wenzhang");
-
-	$wenzhang.css("display","block").animate({"width":"100%","left":"0"},300,function(){
-			$wenzhang.animate({"height":"100%","top":"0"},500,function(){
-				$("#wenzhangl,#wenzhangr").fadeIn(300);
-			});
-	});	
-}
-
-
 //点击游戏关闭按钮，关闭游戏详细div
 function gameClose(){
 	var $youxi = $("#youxi");
@@ -577,9 +583,6 @@ function gameClose(){
 //点击P3按钮移动对应的大图
 function gotoTheP3Img(num){
 	var nowone = $(".p3thisone","#page3_bigimg").eq(0);		//当前的大图对象
-	
-	
-	
 	var nownum = nowone.data("num");					//当前的序号
 	
 	if(num == nownum){
@@ -620,14 +623,7 @@ function gotoTheP3Img(num){
 	nowbtn.removeClass("bigbtncolor");	
 }
 
-//打开具体的work页
-function openWork(e,id){
-	var x = e.pageX;
-	var y = e.pageY;
-	$("#mywork").css({"top":y+"px","left":x+"px","display":"block"}).stop().animate({"top":"0","left":"0","width":"100%","height":"100%"},500,function(){
-		$("#myworkbox").fadeIn(300);	
-	});
-}
+
 //关闭具体的work页
 function closeWork(){
 	$("#mywork").animate({"top":"50%","left":"50%","width":"0","height":"0"},300);
@@ -757,6 +753,11 @@ function getMessageBack(data){
 //电影列表模版
 var moviehtml = "<img src='@img@' class='movecard l_imgback reflex itiltnone idistance5' onload='initCanvas(this)' onClick='clickmovie(@id@)'>";
 
+//调用倒影插件的方法
+function initCanvas(the){
+	if(isIE){addIEReflex(the);}else {addReflex(the);}
+}
+
 //获取电影列表的回调函数
 function getMovieListBack(data){
 	var json = JSON.parse(data);
@@ -809,29 +810,31 @@ function getMovieInfoBack(data){
 function getGameListBack(data){
 	var json = JSON.parse(data);
 	
-	var thehtml = '<div class="game_i articlelist articlelist_media l_cursor opacitytran" onClick="gameOpen(@id@)"><div class="article_info1"><span class="ar_info1">@name@</span></div></div>';
+	var thehtml = '<div class="game_i articlelist articlelist_media l_cursor opacitytran" style="background-image:url(@imgpath@)" onClick="gameOpen(@id@)"><div class="article_info1"><span class="ar_info1">@name@</span></div></div>';
     var str = "";           	
     for(var i=0;i<json.list.length;i++){
-    	str+=thehtml.replace(/@id@/g,json.list[i].id).replace(/@name@/g,json.list[i].name);
+    	str+=thehtml.replace(/@id@/g,json.list[i].id).replace(/@name@/g,json.list[i].name).replace(/@imgpath@/g,json.list[i].imgpath);
     }
-    var $i = $(".iload","#gamebox");
-    $i.css("display","none")
-	$(str).insertBefore($i);
+    
+    $(".iload","#p2_game").css("display","none");
+	$(str).insertBefore($("#gamebox_t"));
+	$("#gamebox").animate({"opacity":"1"},300);
 }
 
 //点击游戏列表，打开游戏详细div
 function gameOpen(id){
 	var $youxi = $("#youxi");
 
-	$youxi.animate({"left":"0"},300,function(){
-				$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
-				$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
-				$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
-	});	
+	$youxi.animate({"left":"0"},300);	
 	
-	if($("#movieinfo_id").val() == id)return;
+	if($("#yx_id").val() == id){
+		$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
+		$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
+		$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
+		return;
+	};
 	
-	//先清空信息
+	$(".iload","#youxi").css("display","block");
 	
 	$.ajax({
 		url:"main/todo.do",
@@ -844,9 +847,192 @@ function gameOpen(id){
 	})
 }
 
+//详细游戏信息回调函数
 function gameOpenBack(data){
 	var json = JSON.parse(data);
+	$("#yx_id").val(json.list[0].id);
+	$("#youxi_1").css("background-color",json.list[0].imgpath).text(json.list[0].name);
+	$("#yx_name").text(json.list[0].name);
+	$("#yx_type").text(json.list[0].type);
+	
+	var star = parseInt(json.list[0].star);
+	var stars = "";
+	for(var i=0;i<star;i++){
+		stars+="★";
+	}
+	
+	$("#yx_star").text(stars);
+	$("#yx_howbig").text(json.list[0].howbig);
+	$("#yx_pz").text(json.list[0].deploy);
+	$("#yx_down").attr("href",json.list[0].downlink).text(json.list[0].downinfo);
+	$("#yx_info").text(json.list[0].info);
+	$("#yx_mytalk").text(json.list[0].mytalk);
+	
+	var imghtml = '<img src="@img@" class="y3_img"/>';
+	var str = "";
+	for(var i=0;i<json.list[0].gameimg.length;i++){
+		str+=imghtml.replace(/@img@/g,baseip+json.list[0].gameimg[i].imgpath);
+	}
+	$(str).appendTo($("#yx_imgs"));
+	
+	$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
+	$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
+	$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
+	
+	$(".iload","#youxi").css("display","none");
 }
+
+//加载全部文章列表回调函数
+function getArticleListBack(data){
+	var json = JSON.parse(data);
+
+	var ahtml = '<div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen(@id@)"><div class="article_info1"><span class="ar_info1">@title@</span><span class="ar_info2">作者：@aur@</span></div></div>';
+	var str="";
+	for(var i=0;i<json.list.length;i++){
+		str+=ahtml.replace(/@id@/g,json.list[i].id).replace(/@title@/g,json.list[i].title).replace(/@aur@/g,json.list[0].author);
+	}
+	
+	$(".iload","#p2_article").css("display","none");
+	$(str).insertBefore($("#article_t"));
+	$("#articlebox").animate({"opacity":"1"},300);
+	
+}
+
+//点击文章列表，打开文章详细div
+function wenzhangOpen(id){
+	var $wenzhang = $("#wenzhang");
+
+	$wenzhang.css("display","block").animate({"width":"100%","left":"0"},300,function(){
+			$wenzhang.animate({"height":"100%","top":"0"},500);
+	});	
+	
+	if(id==$("#wenzhangid").val()){
+		$("#wenzhangl,#wenzhangr").fadeIn(300);
+		return;
+	}
+	
+	$(".iload","#wenzhang").css("display","block");
+	
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getOneArticle&p="+id,
+		success:getOneArticleBack,
+		error:function(){
+			bodyMessage("获取文章信息失败");
+		}
+	})
+}
+
+//获取详细文章信息回调函数
+function getOneArticleBack(data){
+	var json = JSON.parse(data);
+	
+	$("#wenzhangid").val(json.list[0].id);
+	$("#w_title").text(json.list[0].title);
+	$("#w_autor").text("————"+json.list[0].author);
+	$("#w_body").html(json.list[0].articlebody);
+	$("#wenzhang_photo").attr("src",json.list[0].photo);
+	$("#w_autor2").text(json.list[0].author);
+	$("#w_autorinfo").text(json.list[0].intr);
+	
+	$(".iload","#wenzhang").css("display","none");
+	$("#wenzhangl,#wenzhangr").fadeIn(300);
+	
+}
+
+//获取第3页我的工作列表
+function getAllWorks(){
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getAllWorks&p=",
+		success:getAllWorksBack,
+		error:function(){
+			setTimeout("getAllWorks()",100000);//如果获取失败，10S后重新获取
+		}
+	})
+}
+//获取第3页我的工作列表回调函数
+function getAllWorksBack(data){
+	var json = JSON.parse(data);
+	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg l_cursor" data-num="@num@" onClick="openWork(event,@id@)"></div>';
+	var bigword = '<div id="bigword_@num@" class="p3_word l_nowarp">@titleinfo@</div>';
+	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
+	
+	var str1="";
+	var str2="";
+	var str3="";
+	var j=1;
+	for(var i=0;i<json.list.length;i++){
+		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id);
+		str2+=bigword.replace(/@num@/g,j).replace(/@titleinfo@/g,json.list[i].titleinfo);
+		str3+=bigbtn.replace(/@num@/g,j).replace(/@title@/g,json.list[i].title);
+		j++;
+	}
+	$("#page3_bigimg").append($(str1));
+	$("#page3_word").append($(str2));
+	$("#p3_t").before($(str3));
+	
+	setTimeout("initMyWorkList()",16);
+}
+
+//初始化工作列表
+function initMyWorkList(){
+	$("#bigimg_1","#page3_bigimg").addClass("p3thisone").css("top","0");
+	$("#bigword_1","#page3_word").addClass("p3thisword").css("top","0");
+	$("#bigbtn_1","#page3_list").addClass("bigbtncolor");
+}
+
+//打开具体的work页
+function openWork(e,id){
+	var x = e.pageX;
+	var y = e.pageY;
+	$("#mywork").css({"top":y+"px","left":x+"px","display":"block"}).stop().animate({"top":"0","left":"0","width":"100%","height":"100%"},500);
+	
+	if($("mywork_t").val()==id){
+		$("#myworkbox").fadeIn(300);
+		return;
+	}
+	
+	$(".iload","#mywork").css("display","block");
+	
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getOneMyWork&p="+id,
+		success:openWorkBack,
+		error:function(){
+			bodyMessage("获取信息失败");
+		}
+	})
+}
+
+function openWorkBack(data){
+	var json = JSON.parse(data);
+	
+	var img = '<img src="@imgpath@" class="mywork_info1"/>';
+    var div = '<div class="mywork_info2">@info@</div>';
+    
+    var str = "";
+    for(var i=0;i<json.list.length;i++){
+    	if(json.list[i].imgpath){//有图片的显示图片
+    		str+=img.replace(/@imgpath@/g,json.list[i].imgpath);
+    	}else{//否则显示文字
+    		str+=div.replace(/@info@/g,json.list[i].info);
+    	}
+    }
+    $("#myworkbox").html(str);
+    
+    $(".iload","#mywork").css("display","none");
+    $("#myworkbox").fadeIn(300);
+}
+
+
+
+
+
+
 
 
 

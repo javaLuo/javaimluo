@@ -113,9 +113,14 @@ function show1(){
 	$("#l_gbl").css({"-webkit-transform":"rotate(-45deg) translate(-244px,65px)","transform":"rotate(-45deg) translate(-244px,65px)"});
 	$("#logo,#footer").fadeOut(600);
 	$("#box3d").delay(600).fadeOut(300,function(){
-			l.addClass("lShow1");
-			r.addClass("rShow1");
-			$("#showmusic").get(0).play();
+			l.addClass("flShow1");
+			r.addClass("frShow1");
+			
+			if(!!document.createElement('audio').canPlayType)
+			{
+				$("#showmusic").get(0).play();
+			}
+			
 			$(window).delay(500).show(0,function(){
 				$("#box").css("display","block");
 				
