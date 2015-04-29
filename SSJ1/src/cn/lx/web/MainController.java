@@ -3,7 +3,6 @@ package cn.lx.web;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,15 +16,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.nutz.json.Json;
 import org.nutz.json.JsonFormat;
 
+import cn.lx.bean.Article;
 import cn.lx.bean.Game;
 import cn.lx.bean.Message;
 import cn.lx.bean.Movie;
-import cn.lx.bean.MovieImgs;
-import cn.lx.bean.MoviePojo1;
+import cn.lx.bean.MyWork;
+import cn.lx.bean.MyWorkBody;
+import cn.lx.service.ArticleService;
 import cn.lx.service.GameService;
 import cn.lx.service.MessageService;
-import cn.lx.service.MovieImgsService;
 import cn.lx.service.MovieService;
+import cn.lx.service.MyWorkBodyService;
+import cn.lx.service.MyWorkService;
 import cn.lx.utils.AppConfig;
 import cn.lx.utils.AppUtils;
 import cn.lx.utils.ReturnMsg;
@@ -42,6 +44,12 @@ public class MainController
 	private MovieService movieservice;
 	@Autowired
 	private GameService gameservice;
+	@Autowired
+	private ArticleService articleservice;
+	@Autowired
+	private MyWorkService myworkservice;
+	@Autowired
+	private MyWorkBodyService myworkbodyservice;
 
 	
 	@RequestMapping(value = { "/todo"})
@@ -66,6 +74,16 @@ public class MainController
 					return getMovieInfo(p);
 				case getGameList://获取全部游戏列表
 					return getGameList(p);
+				case gameOpen://获取游戏详细信息
+					return gameOpen(p);
+				case getArticleList://获取全部文章列表
+					return getArticleList(p);
+				case getOneArticle://获取详细文章信息
+					return getOneArticle(p);
+				case getAllWorks://获取全部我的工作列表
+					return getAllWorks(p);
+				case getOneMyWork://获取我的工作详细信息
+					return getOneMyWork(p);
 				default:
 					return Json.toJson(AppUtils.getErrorJson(),JsonFormat.compact());
 			}
@@ -155,7 +173,85 @@ public class MainController
 	private String getGameList(String p){
 		ReturnMsg<Game> msg = new ReturnMsg<Game>();
 		List<Game> m = gameservice.getGameList();
-		
+
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取详细游戏信息
+	 * */
+	private String gameOpen(String p){
+		String[] s = p.split(AppConfig.PAT);
+		ReturnMsg<Game> msg = new ReturnMsg<Game>();
+		List<Game> m = gameservice.gameOpen(s[0]);
+
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取全部文章列表
+	 * */
+	private String getArticleList(String p){
+		ReturnMsg<Article> msg = new ReturnMsg<Article>();
+		List<Article> m = articleservice.getArticleList();
+
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取详细文章信息
+	 * */
+	private String getOneArticle(String p){
+		String[] s = p.split(AppConfig.PAT);
+		ReturnMsg<Article> msg = new ReturnMsg<Article>();
+		List<Article> m = articleservice.getOneArticle(s[0]);
+
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取全部我的工作列表
+	 * */
+	private String getAllWorks(String p){
+		ReturnMsg<MyWork> msg = new ReturnMsg<MyWork>();
+		List<MyWork> m = myworkservice.getMyWorkList();
+
+		msg.setCode(AppConfig.OK_STATUS);
+		msg.setList(m);
+
+		String json = Json.toJson(msg, JsonFormat.compact());
+		System.out.println(json);
+		return json;
+	}
+	
+	/**
+	 * 获取我的工作详细信息
+	 * */
+	private String getOneMyWork(String p){
+		String[] s = p.split(AppConfig.PAT);
+		ReturnMsg<MyWorkBody> msg = new ReturnMsg<MyWorkBody>();
+		List<MyWorkBody> m = myworkbodyservice.getOneMyWork(s[0]);
+
 		msg.setCode(AppConfig.OK_STATUS);
 		msg.setList(m);
 

@@ -1,23 +1,17 @@
 package cn.lx.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import cn.lx.bean.Game;
-import cn.lx.bean.Message;
 import cn.lx.bean.Movie;
-import cn.lx.bean.MoviePojo1;
-import cn.lx.dao.MessageDao;
 import cn.lx.dao.MovieDao;
 import cn.lx.utils.AppConfig;
 
 /**
- * 留言 服务类
+ * 电影 服务类
  * */
 @Service
 public class MovieService{
@@ -26,7 +20,7 @@ public class MovieService{
 	private MovieDao md;
 
 	/**
-	 * 分页获取留言列表
+	 * 分页获取电影列表
 	 * */
 	public List<Movie> getMovieList(String rownow, int max)
 	{

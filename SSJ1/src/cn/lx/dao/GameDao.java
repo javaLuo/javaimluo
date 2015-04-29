@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import cn.lx.bean.Game;
 import cn.lx.bean.Movie;
-import cn.lx.bean.MoviePojo1;
 
 @Repository
 public interface GameDao extends JpaRepository<Game, Integer>
@@ -16,6 +15,9 @@ public interface GameDao extends JpaRepository<Game, Integer>
 
 	@Query(value="select * from game order by id asc",nativeQuery=true)
 	List<Game> getGameList();
+
+	@Query(value="select * from game where id=?1",nativeQuery=true)
+	List<Game> getOneGame(Integer id);
 
 
 }

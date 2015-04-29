@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import cn.lx.bean.Movie;
-import cn.lx.bean.MoviePojo1;
 
 @Repository
 public interface MovieDao extends JpaRepository<Movie, Integer>

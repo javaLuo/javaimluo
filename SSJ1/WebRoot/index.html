@@ -6,7 +6,7 @@
 	<meta name="renderer" content="webkit">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     <title>ISLUO</title>
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="kernel/luo/luo.css">
     <link rel="stylesheet" href="kernel/customer/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="kernel/index/css/index.css">
@@ -99,37 +99,12 @@
             <!-- 文章div开始 -->
             <div id="p2_article" class="p2_divs">
             	<div id="articlebox" class="articlebox">
-                	   <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
+                	   <!-- <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
                         	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
-                        <div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen()">
-                        	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
-                        </div>
+                        </div>-->
+                        <div id="article_t" style="display:none;"></div>
                 </div>
+                 <img class="iload" src="kernel/index/img/onload.gif">
             </div>
             <!-- 文章div结束 -->
             
@@ -139,8 +114,9 @@
                 	   <!--  <div class="game_i articlelist articlelist_media l_cursor opacitytran" onClick="gameOpen()">
                         	<div class="article_info1"><span class="ar_info1">文章名称</span><span class="ar_info2">作者：某某</span></div>
                         </div>-->
-                        <img class="iload" src="kernel/index/img/onload.gif">
+                        <div id="gamebox_t" style="display:none;"></div>
                 </div>
+                <img class="iload" src="kernel/index/img/onload.gif">
             </div>
             <!-- 游戏div结束 -->
             
@@ -151,22 +127,14 @@
         <!-- -------------------page3------------------- -->
         <div id="page3" class="page">
         	<div id="page3_bigimg" class="page3_bigimg">
-            	<div id="bigimg_1" class="p3_bigimg l_cursor p3thisone" data-num="1" onClick="openWork(event,1111)">1</div>
-                <div id="bigimg_2" class="p3_bigimg l_cursor" data-num="2" onClick="openWork(event,1111)">2</div>
-                <div id="bigimg_3" class="p3_bigimg l_cursor" data-num="3" onClick="openWork(event,1111)">3</div>
-                <div id="bigimg_4" class="p3_bigimg l_cursor" data-num="4" onClick="openWork(event,1111)">4444</div>
+            	<!-- <div id="bigimg_1" class="p3_bigimg l_cursor p3thisone" data-num="1" onClick="openWork(event,1111)">1</div> -->
             </div>
             <div id="page3_word" class="page3_word">
-            	<div id="bigword_1" class="p3_word l_nowarp p3thisword">网站网站网站网站网站网站网站网站网站</div>
-                <div id="bigword_2" class="p3_word l_nowarp">网站2</div>
-                <div id="bigword_3" class="p3_word l_nowarp">网站3</div>
-                <div id="bigword_4" class="p3_word l_nowarp">网站4</div>
+            	<!--<div id="bigword_1" class="p3_word l_nowarp p3thisword">网站网站网站网站网站网站网站网站网站</div> -->
             </div>
         	<div id="page3_list" class="page3_list">
-            	<div id="bigbtn_1" class="p3_banner l_cursor" onClick="gotoTheP3Img(1)">网站名称</div>
-                <div id="bigbtn_2" class="p3_banner l_cursor" onClick="gotoTheP3Img(2)">网站名称</div>
-                <div id="bigbtn_3" class="p3_banner l_cursor" onClick="gotoTheP3Img(3)">网站名称</div>
-                <div id="bigbtn_4" class="p3_banner l_cursor" onClick="gotoTheP3Img(4)">网站名称</div>
+            	<!--<div id="bigbtn_1" class="p3_banner l_cursor" onClick="gotoTheP3Img(1)">网站名称</div> -->
+            	<div id="p3_t" style="display:none"></div>
             </div>
         </div>
         <!-- -------------------page3结束------------------- -->
@@ -322,17 +290,20 @@
     
     <!-- 文章div -->
     <div id="wenzhang" class="wenzhang">
+    	<input id="wenzhangid" type="hidden"/>
+    	<img class="iload" src="kernel/index/img/onload.gif">
     	<div id="wenzhangl" class="wenzhangl wenzhangl_media">
         	<div class="wenzhang_1">
-            	<h2 style="display:block;">文章标题写在这里</h2>
-                <span>————文章作者名字</span>
-                <div style="width:100%;height:1px;background-color:#e5e5e5;margin-top:1.5em;margin-bottom:1.5em;"></div>
-                <p>1111111</p><p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p><p>adfasdfadf</p></div>
+            	<h2 id="w_title" style="display:block;"></h2>
+                <span id="w_autor"></span>
+                <div class="wenzhang_line"></div>
+                <div id="w_body"></div>
+            </div>
         </div>
         <div id="wenzhangr" class="wenzhangr wenzhangr_media">
-        	<img id="wenzhang_photo" class="wenzhang_photo" src="kernel/index/img/home1.jpg"/><br/>
-            <span class="l_font150">作者名字</span><br/><br/>
-            <div style="width:80%;left:10%">阿来，当代著名作家，第五届茅盾文学奖得主，现任四川省作协主席。代表作《尘埃落定》、《空山》、《格萨尔王》等。</div><br/>
+        	<img id="wenzhang_photo" class="wenzhang_photo" src="#"/><br/>
+            <span id="w_autor2" class="l_font150"></span><br/><br/>
+            <div id="w_autorinfo" style="width:80%;left:10%"></div><br/>
         </div>
         <div id="wenzhang_close" class="wenzhang_close l_cursor">
               <div class="wclose_l"></div>
@@ -342,32 +313,32 @@
     
     <!-- 游戏div -->
     <div id="youxi" class="youxi">
-    	<div id="youxi_1" class="youxi_1 l_textcenter l_font200" style="background-color:#003">游戏名称</div>
-		<div id="youxi_2" class="youxi_div youxi_2"  style="background-color:#030">
+    	<input id="yx_id" type="hidden"/>
+    	<img class="iload" src="kernel/index/img/onload.gif">
+    	<div id="youxi_1" class="youxi_1 l_textcenter l_font200"></div>
+		<div id="youxi_2" class="youxi_div youxi_2">
         	<div class="y2_lr ybox_media">
-            	<div class="y2_info l_nowarp">游戏名字</div>
-                <div class="y2_info l_nowarp">游戏类型</div>
-                <div class="y2_info l_nowarp">推荐星级</div>
+            	<div class="y2_info l_nowarp">游戏名字:<span id="yx_name" class="yx_span"></span></div>
+                <div class="y2_info l_nowarp">游戏类型:<span id="yx_type" class="yx_span"></span></div>
+                <div class="y2_info l_nowarp">推荐星级:<span id="yx_star" class="yx_span"></span></div>
             </div>
             <div class="y2_lr ybox_media">
-            	<div class="y2_info l_nowarp">游戏大小</div>
-                <div class="y2_info l_nowarp">游戏配置:PC windows xp以上 512M显存 CPU1GHZ</div>
-                <div class="y2_info l_nowarp">下载地址:www.sadfasdfasdfasdfasdfasdfasdfasdfasdfdsfh.com</div>
+            	<div class="y2_info l_nowarp">游戏大小:<span id="yx_howbig" class="yx_span"></span></div>
+                <div class="y2_info l_nowarp">游戏配置:<span id="yx_pz" class="yx_span"></span></div>
+                <div class="y2_info l_nowarp">下载地址:<a id="yx_down" class="l_a2" style="margin-left:.5em;" href="#" title="将打开其他网站页面"></a></div>
             </div>
         </div>
         
-        <div id="youxi_3" class="youxi_div youxi_3"  style="background-color:#300">
+        <div id="youxi_3" class="youxi_div youxi_3">
         	<div class="ybox_media"><div class="y3_title">游戏简介</div></div>
-            <div class="y3_info">游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介</div>
+            <div id="yx_info" class="y3_info"></div>
             <div class="l_line98"></div>
             <div class="ybox_media"><div class="y3_title">我的评语</div></div>
-            <div class="y3_info">游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介游戏简介</div>
+            <div id="yx_mytalk" class="y3_info"></div>
             <div class="l_line98"></div>
             <div class="ybox_media"><div class="y3_title">游戏截图</div></div>
-            <div class="y3_info">
-            	<img src="kernel/index/img/home2.jpg" class="y3_img"/>
-                <img src="kernel/index/img/home2.jpg" class="y3_img"/>
-                <img src="kernel/index/img/home2.jpg" class="y3_img"/>
+            <div id="yx_imgs" class="y3_info">
+            	<!-- <img src="kernel/index/img/home2.jpg" class="y3_img"/>-->
             </div>
         </div>
         
@@ -376,23 +347,19 @@
               <div class="wclose_r"></div>
         </div>
     </div>
-    
-     <!-- 游戏div -->
+     <!-- 游戏div结束 -->
+     
     <div id="mywork" class="mywork">
+    	<input id="mywork_t" type="hidden">
+    	<img class="iload" src="kernel/index/img/onload.gif">
     	<div id="myworkbox" class="myworkbox">
-            <img src="kernel/index/img/home1.jpg" class="mywork_info1"/>
-            <div class="mywork_info2">
-                文字说明文字说明文字说明文字说明文字说明文字说明
-            </div>
-            <img src="kernel/index/img/home1.jpg" class="mywork_info1"/>
-            <div class="mywork_info2">
-                文字说明文字说明文字说明文字说明文字说明文字说明
-            </div>
-            <div id="mywork_close" class="wenzhang_close l_cursor">
-                  <div class="wclose_l"></div>
-                  <div class="wclose_r"></div>
-            </div>
+            <!-- <img src="kernel/index/img/home1.jpg" class="mywork_info1"/>
+            <div class="mywork_info2">文字说明</div>-->
        	</div>
+       	<div id="mywork_close" class="wenzhang_close l_cursor">
+              <div class="wclose_l"></div>
+              <div class="wclose_r"></div>
+        </div>
     </div>
     
     <!-- 窗口小提示 -->
@@ -414,19 +381,5 @@
     <script src="kernel/customer/jquery.mCustomScrollbar.concat.min.js"></script><!-- 滚动条插件 -->
     <script src="kernel/index/js/index.js"></script>
     <script src="kernel/reflex/reflex.js"></script><!-- 图片倒影插件 -->
-    <script>
-var i=0;
-function add(){
-	i++;
-	$(".mCSB_container","#movedh").append($("<img src='kernel/index/img/mp3list/a.jpg' class='movecard reflex itiltnone idistance5' onload='initCanvas(this)' onClick='clickimg("+i+")'>"));
-	//setTimeout(function(){if(isIE){addIEReflex(); }else {addReflex();}},1000);
-}
-function clickimg(id){
-	alert(id);
-}
-function initCanvas(the){
-	if(isIE){addIEReflex(the);}else {addReflex(the);}
-}
-</script>
   </body>
 </html>
