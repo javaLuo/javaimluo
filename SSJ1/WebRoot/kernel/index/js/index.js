@@ -784,7 +784,9 @@ function getMovieInfoBack(data){
 	var json = JSON.parse(data);
 	
 	$("#movieinfo_id").val(json.list[0].id);						//ID
-	$("#movieinfo_img").attr("src",baseip+json.list[0].imgpath);	//封面图片
+	$("#movieinfo_img").data("src",baseip+json.list[0].imgpath)
+						.attr("src","kernel/loadimg/wright.png")
+						.addClass("load_img");						//封面图片
 	$("#movieinfo_name").text(json.list[0].title);					//电影名字
 	$("#movieinfo_info").text(json.list[0].info);					//电影简介
 	$("#movieinfo_type").text(json.list[0].type);					//类型
@@ -798,12 +800,16 @@ function getMovieInfoBack(data){
 	$("#movieinfo_mytalk").text(json.list[0].mytalk);		//我的评语
 	$("#movieinfo_downlink").attr("href",json.list[0].downlink).text(json.list[0].downinfo);
 	
-	var imghtml = '<img class="movieinfo_photo l_imgback" src="@imgpath@"/>';
+	var imghtml = '<img class="movieinfo_photo l_imgback load_img" data-src="@imgpath@" src="kernel/loadimg/wright.png" />';
 	var str = "";
 	for(var i=0;i<json.list[0].movieimgs.length;i++){
 		str+=imghtml.replace(/@imgpath@/g,baseip+json.list[0].movieimgs[i].imgpath);
 	}
 	$("#movieinfo_jz").append($(str));
+	
+	 setTimeout(function(){
+    	$(".load_img","#movielr").LoadImage();
+    },16);
 }
 
 //加载全部游戏列表回调函数
@@ -868,18 +874,24 @@ function gameOpenBack(data){
 	$("#yx_info").text(json.list[0].info);
 	$("#yx_mytalk").text(json.list[0].mytalk);
 	
-	var imghtml = '<img src="@img@" class="y3_img"/>';
+	var imghtml = '<img src="kernel/loadimg/wright.png" data-src="@img@" class="y3_img load_img"/>';
 	var str = "";
 	for(var i=0;i<json.list[0].gameimg.length;i++){
 		str+=imghtml.replace(/@img@/g,baseip+json.list[0].gameimg[i].imgpath);
 	}
-	$(str).appendTo($("#yx_imgs"));
+
+	$("#yx_imgs").html(str);
 	
 	$("#youxi_1").animate({"margin-top":"0","opacity":"1"},300);
 	$("#youxi_2").delay(150).animate({"margin-top":"0","opacity":"1"},300);
 	$("#youxi_3").delay(300).animate({"margin-top":"0","opacity":"1"},300);
 	
 	$(".iload","#youxi").css("display","none");
+	
+	 setTimeout(function(){
+    	$(".load_img","#youxi").LoadImage();
+    },16);
+	 
 }
 
 //加载全部文章列表回调函数
@@ -956,7 +968,7 @@ function getAllWorks(){
 //获取第3页我的工作列表回调函数
 function getAllWorksBack(data){
 	var json = JSON.parse(data);
-	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg l_cursor" data-num="@num@" onClick="openWork(event,@id@)"></div>';
+	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg l_cursor" data-num="@num@" onClick="openWork(event,@id@)" style="background-image:url(@imgpath@)"></div>';
 	var bigword = '<div id="bigword_@num@" class="p3_word l_nowarp">@titleinfo@</div>';
 	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
 	
@@ -965,7 +977,7 @@ function getAllWorksBack(data){
 	var str3="";
 	var j=1;
 	for(var i=0;i<json.list.length;i++){
-		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id);
+		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id).replace(/@imgpath@/g,json.list[i].imgpath);
 		str2+=bigword.replace(/@num@/g,j).replace(/@titleinfo@/g,json.list[i].titleinfo);
 		str3+=bigbtn.replace(/@num@/g,j).replace(/@title@/g,json.list[i].title);
 		j++;
@@ -1011,7 +1023,7 @@ function openWork(e,id){
 function openWorkBack(data){
 	var json = JSON.parse(data);
 	
-	var img = '<img src="@imgpath@" class="mywork_info1"/>';
+	var img = '<img src="kernel/loadimg/wright.png" data-src="@imgpath@" class="mywork_info1 load_img"/>';
     var div = '<div class="mywork_info2">@info@</div>';
     
     var str = "";
@@ -1026,6 +1038,10 @@ function openWorkBack(data){
     
     $(".iload","#mywork").css("display","none");
     $("#myworkbox").fadeIn(300);
+    
+    setTimeout(function(){
+    	$(".load_img","#myworkbox").LoadImage();
+    },16);
 }
 
 

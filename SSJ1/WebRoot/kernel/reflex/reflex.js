@@ -413,6 +413,7 @@ function addReflex(the) {
 			canvas.style.visibility = 'visible';
 			canvas.style.width = '6em';
 			canvas.style.height = '10em';
+			canvas.style.opacity = '1';
 		}
 	//}
 }
