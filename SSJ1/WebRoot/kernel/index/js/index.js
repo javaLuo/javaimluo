@@ -1060,7 +1060,7 @@ function openWorkBack(data){
     
     $(".iload","#mywork").css("display","none");
     $("#myworkbox").fadeIn(300);
-    
+
     setTimeout(function(){
     	$(".load_img","#myworkbox").LoadImage();
     },16);

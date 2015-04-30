@@ -785,6 +785,7 @@ p{
 .movieinfo_img{
 	width:80%;
 	margin-left:10%;
+	border-radius:.3em;
 }
 .movieinfo_div{
 	padding:1em;
