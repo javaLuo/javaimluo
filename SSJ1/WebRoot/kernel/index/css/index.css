@@ -136,13 +136,13 @@
 /*//////标签//////*/
 /*///////////////*/
 html{
-	background-color:#000000;
+	background-color:rgb(0,0,0);
 	}
 body{
 	overflow:hidden;
 	width:100%;
 	height:100%;
-	background-color:#000000;
+	background-color:rgb(0,0,0);
 	}
 p{
 	text-indent:2em;	
@@ -164,7 +164,7 @@ p{
 	left:0;
 	width:100%;
 	height:100%;
-	background-color:rgb(153,0,0);
+	background-color:rgb(0,0,0);
 	display:none;
 }
 #logo{
@@ -284,7 +284,7 @@ p{
 	left:0;
 	width:100%;
 	height:100%;
-	background-color:rgb(30,30,30);
+	background-color:rgb(0,0,0);
 	overflow:hidden;
 }
 .daohang_d{/* 导航中的小div样式 */
@@ -768,6 +768,12 @@ p{
 	height:10em;
 	margin:0 .5em 0 .5em;
 	cursor:pointer;
+	color:#fefefe;
+	background-color:rgba(0,0,0,.7);
+	display:none;
+}
+.movecardbtn:hover{
+	background-color:rgba(0,0,0,1);
 }
 .movieinfol{
 	top:0;
@@ -779,6 +785,7 @@ p{
 .movieinfo_img{
 	width:80%;
 	margin-left:10%;
+	border-radius:.3em;
 }
 .movieinfo_div{
 	padding:1em;

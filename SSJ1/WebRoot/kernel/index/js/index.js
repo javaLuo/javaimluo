@@ -489,32 +489,50 @@ function mytingbtnClick(the){
 }
 
 //加载全部文章列表
+var getArticleListA = 0;//1为正在请求，0为空闲
 function getArticleList(){
-		$.ajax({
-			url:"main/todo.do",
-			type:"get",
-			data:"m=getArticleList&p=",
-			success:getArticleListBack,
-			error:function(){
-				bodyMessage("加载失败");
-			}
-		})
+	if(getArticleListA == 1){
+		return;
+	}
+	getArticleListA = 1;
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getArticleList&p=",
+		success:getArticleListBack,
+		error:function(){
+			bodyMessage("加载失败");
+			getArticleListA = 0;
+		}
+	})
 }
 
 //加载全部game列表
+var getGameListA = 0;//1为正在请求，0为空闲
 function getGameList(){
-		$.ajax({
-			url:"main/todo.do",
-			type:"get",
-			data:"m=getGameList&p=",
-			success:getGameListBack,
-			error:function(){
-				bodyMessage("加载失败");
-			}
-		})
+	if(getGameListA == 1){
+		return;
+	}
+	getGameListA = 1;
+	$.ajax({
+		url:"main/todo.do",
+		type:"get",
+		data:"m=getGameList&p=",
+		success:getGameListBack,
+		error:function(){
+			bodyMessage("加载失败");
+			getGameListA = 0;
+		}
+	})
 }
 //加载更多movie列表
+var getMovieListA = 0;
 function getMovieList(pageNow){
+	if(getMovieListA == 1){
+		return;
+	}
+	getMovieListA = 1;
+	
 		$.ajax({
 			url:"main/todo.do",
 			type:"get",
@@ -765,6 +783,8 @@ function getMovieListBack(data){
 	
 	if(json.list.length<15){
 		$m.css("display","none");
+	}else{
+		$m.css("display","inline-block");
 	}
 	if(json.list.length<=0){	//没有更多了
 		
@@ -775,8 +795,8 @@ function getMovieListBack(data){
 		}
 
 		$(str).insertBefore($m);
-
 	}
+	getMovieListA = 0;
 }
 
 //获取具体的电影信息
@@ -825,6 +845,7 @@ function getGameListBack(data){
     $(".iload","#p2_game").css("display","none");
 	$(str).insertBefore($("#gamebox_t"));
 	$("#gamebox").animate({"opacity":"1"},300);
+	getGameListA = 0;
 }
 
 //点击游戏列表，打开游戏详细div
@@ -907,6 +928,7 @@ function getArticleListBack(data){
 	$(".iload","#p2_article").css("display","none");
 	$(str).insertBefore($("#article_t"));
 	$("#articlebox").animate({"opacity":"1"},300);
+	getArticleListA = 0;
 	
 }
 
@@ -1038,7 +1060,7 @@ function openWorkBack(data){
     
     $(".iload","#mywork").css("display","none");
     $("#myworkbox").fadeIn(300);
-    
+
     setTimeout(function(){
     	$(".load_img","#myworkbox").LoadImage();
     },16);
