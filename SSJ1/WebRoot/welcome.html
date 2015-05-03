@@ -8,6 +8,7 @@
     <meta name="keywords" content="isluo"/>
     <title>isluo</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="kernel/index/css/welcome.css">
     <style>
 	.blur {
 		transition:box-shadow .8s,transform 1s,width 1s,height 1s,opacity .3s;
@@ -184,10 +185,12 @@
 				return;
 			}
 			setTimeout(function(){
-				document.getElementById("l_6").style.animationPlayState = "paused";
+				//document.getElementById("l_6").style.animationPlayState = "paused";
 				//document.getElementById("l_6").style["-webkit-animation-play-state"] = "paused";
 				document.getElementById("loadingbox").style["opacity"] = "0";
-				
+				//document.getElementById("l_6").parentNode.remove(documnt.getElementById("l_6"));
+				var obj = document.getElementById("l_6");
+				obj.parentNode.removeChild(obj);
 				setTimeout("pageShow()",300);
 			},500);
 			
@@ -196,8 +199,6 @@
 		setTimeout("loadin()",200);
 </script>
 
-    <link rel="stylesheet" href="kernel/index/css/welcome.css">
-    
     <!-- IE6-9 infobox -->
     <div class="l_curtain"></div>
     <div id="checkrower">
@@ -264,11 +265,10 @@
         <img src="kernel/index/img/welcome/z1.jpg">
         <img src="kernel/index/img/welcome/z2.jpg">
         <img src="kernel/index/img/welcome/z3.jpg">
+        <img src="kernel/index/img/welcome/x1.jpg">
     </div>
     <script src="kernel/jquery-1.11.1/jquery-1.11.1.min.js"></script>
     <script src="kernel/jquery-1.11.1/jquery.easing.min.js"></script>
-    <script src="kernel/textillate/jquery.fittext.js"></script>
-    <script src="kernel/textillate/jquery.lettering.js"></script>
     <script src="kernel/luo/luo.js"></script>
     <script src="kernel/index/js/welcome.js"></script>
   </body>

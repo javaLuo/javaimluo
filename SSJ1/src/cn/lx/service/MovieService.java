@@ -29,7 +29,7 @@ public class MovieService{
 		for(int i=0;i<l.size();i++){
 			Movie m = new Movie();
 			m.setId(l.get(i).getId());
-			m.setImgpath(AppConfig.BASEPATH+l.get(0).getImgpath());
+			m.setImgpath(l.get(i).getImgpath());
 			l2.add(m);
 		}
 		return l2;

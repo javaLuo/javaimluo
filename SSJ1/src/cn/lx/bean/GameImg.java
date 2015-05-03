@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * сно╥м╪ф╛╠М
  * */
-@Entity(name = "game_imgs")
+@Entity(name = "game_img")
 public class GameImg
 {
 	//ID

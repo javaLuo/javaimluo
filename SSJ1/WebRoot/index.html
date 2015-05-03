@@ -14,6 +14,13 @@
 
   </head>
   <body>
+    <!-- 资源预加载 -->
+    <div style="display:none">
+    	<img src="kernel/index/img/home1.jpg"/>
+        <img src="kernel/index/img/home2.jpg"/>
+        <img src="kernel/index/img/home3.jpg"/>
+    </div>
+    
   	<!-- loading img -->
   	<img class="l_loading" src="kernel/index/img/loading.gif"/>
     
@@ -86,7 +93,7 @@
                             <span class="movieinfo_span2"><a id="movieinfo_downlink" class="l_a1" href="#" title="将打开其他网站页面" target="_blank"></a></span>
                         </div>
                         <div id="movieinfo_jz" class="movieinfo_div">
-                            <span class="movieinfo_span1">剧照：</span><br/>
+                            
                         </div>
                     </div>
                 </div>
@@ -132,7 +139,7 @@
             <div id="page3_word" class="page3_word">
             	<!--<div id="bigword_1" class="p3_word l_nowarp p3thisword"></div> -->
             </div>
-        	<div id="page3_list" class="page3_list">
+        	<div id="page3_list" class="page3_list page3_list_media">
             	<!--<div id="bigbtn_1" class="p3_banner l_cursor" onClick="gotoTheP3Img(1)">网站名称</div> -->
             	<div id="p3_t" style="display:none"></div>
             </div>
@@ -297,7 +304,9 @@
             	<h2 id="w_title" style="display:block;"></h2>
                 <span id="w_autor"></span>
                 <div class="wenzhang_line"></div>
+                <img id="w_img" class="w_img" src="kernel/loadimg/wright.png"/>
                 <div id="w_body"></div>
+                
             </div>
         </div>
         <div id="wenzhangr" class="wenzhangr wenzhangr_media">
@@ -367,11 +376,6 @@
     	<span id="body_m" class="body_m"></span>
     </div>
     
-    <!-- 资源预加载 -->
-    <div style="display:none">
-        <img src="kernel/index/img/home2.jpg"/>
-        <img src="kernel/index/img/home3.jpg"/>
-    </div>
 </div>
 <!-- bigboss结束 -->
     <script src="kernel/jquery-1.11.1/jquery-1.11.1.min.js"></script>

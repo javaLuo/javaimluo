@@ -20,8 +20,10 @@
             <property name="hibernate.connection.username" value="root" />
             <!--配置数据库密码 -->
             <property name="hibernate.connection.password" value="123456" />
+            <!-- <property name="hibernate.connection.password" value="4197d1a81b" />-->
             <!--配置数据库url -->
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:8080/isluo?useUnicode=true&amp;characterEncoding=UTF-8" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/isluo?useUnicode=true&amp;characterEncoding=UTF-8" />
+            <!-- <property name="hibernate.connection.url" value="jdbc:mysql://120.24.86.115:3306/isluo?useUnicode=true&amp;characterEncoding=UTF-8" />-->
             <!--设置外连接抓取树的最大深度 -->
             <property name="hibernate.max_fetch_depth" value="3" />
             <!--自动输出schema创建DDL语句 -->

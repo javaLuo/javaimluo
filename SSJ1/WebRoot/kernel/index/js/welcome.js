@@ -67,7 +67,9 @@ function pageInit(){
 	初始化完毕后，页面出现
 */
 function pageShow(){
-
+	l = $("#left");
+	r = $("#right");	
+	
 	$("#logo,#footer").fadeIn(600);
 	$("#box3d_a").css({"transform":"rotateX(0deg) rotateY(0deg)","-webkit-transform":"rotateX(0deg) rotateY(0deg)","opacity":"1"});
 	$("#l_gbr_box").css({"top":"-150px","margin-left":"-185px","opacity":"0"})
@@ -103,6 +105,10 @@ function windowResize(){
 /**
 	片头动画
 */
+var time1 = null;	//第1阶段img timer计时器
+var tag = 0;		//一个标记 0-19,用于第1段图片轮播
+var tagi = 0;		//用于第1段图片轮播到了第几张图片
+
 function show1(){
 	//绑定动画结束事件
 	document.getElementById("s").addEventListener("webkitAnimationEnd",show1Img,false);
@@ -123,7 +129,7 @@ function show1(){
 			
 			$(window).delay(500).show(0,function(){
 				$("#box").css("display","block");
-				
+				tagi = 0;
 				show1Img();
 				$("#words").html("我穿过<br/>&nbsp;&nbsp;&nbsp;&nbsp城市和人海").addClass("word1Show");
 			});
@@ -133,11 +139,6 @@ function show1(){
 
 /* box部分 */
 
-var time1 = null;	//第1阶段img timer计时器
-var tag = 0;		//一个标记 0-19,用于第1段图片轮播
-var tagi = 0;		//用于第1段图片轮播到了第几张图片
-
-	
 	/* 第2阶段左右动画 并触发主动画 */
 	function show2(){
 		//绑定动画结束事件
@@ -184,6 +185,9 @@ var tagi = 0;		//用于第1段图片轮播到了第几张图片
 	
 	/* 第4阶段左右动画 并触发主动画 */
 	function show4(){
+		document.getElementById("s").removeEventListener("webkitAnimationEnd",show3Img,false);
+		document.getElementById("s").removeEventListener("animationend",show3Img,false);
+		
 		l.addClass("lShow4");
 		r.addClass("rShow4");
 		$("#s3d_1").css({"-webkit-transform":"rotateX(45deg) rotateY(30deg) rotateZ(0deg) translateZ(100px)","transform":"rotateX(45deg) rotateY(30deg) rotateZ(0deg) translateZ(100px)","left":"70%","top":"70%"});
@@ -198,10 +202,8 @@ var tagi = 0;		//用于第1段图片轮播到了第几张图片
 		$("#s3d_10").css({"-webkit-transform":"rotateX(45deg) rotateY(-30deg) rotateZ(20deg) translateZ(30px)","transform":"rotateX(45deg) rotateY(-30deg) rotateZ(20deg) translateZ(30px)","left":"43%","top":"45%"});
 		$(window).delay(1400).show(0,function(){
 			$("#s3d").addClass("d3turn").delay(1900).show(0,function(){
-				$(".s3d_d").css({"-webkit-transform":"translateZ(1500px)","transform":"translateZ(1500px)","left":"43%","top":"43%"}).fadeOut(1500,function(){
-					show5();	
-				});
-				
+				$(".s3d_d").css({"-webkit-transform":"translateZ(1500px)","transform":"translateZ(1500px)","left":"43%","top":"43%"}).fadeOut(1500);
+				setTimeout("show5()",1500);
 			});	//开始3D旋转
 			
 		});
@@ -211,7 +213,9 @@ var tagi = 0;		//用于第1段图片轮播到了第几张图片
 	function show5(){
 		$(".lastword").addClass("lastwordshow").delay(3000).show(0,function(){
 			$("#box").fadeOut(400,function(){
-				location=location;
+				//location=location;
+				
+				returnInit();
 			});
 		});
 	}
@@ -284,5 +288,33 @@ var tagi = 0;		//用于第1段图片轮播到了第几张图片
 		$("body").delay(200).fadeOut(500,function(){
 			location.href="index.html";
 		});
-		
 	}
+	
+	var returninith = '<div id="left"></div><div id="right"></div><div id="s_2"></div><div id="s"></div><div id="words"></div>'+
+        '<div id="s3d"><div class="s3d_d" id="s3d_1"></div><div class="s3d_d" id="s3d_2"></div><div class="s3d_d" id="s3d_3"></div><div class="s3d_d" id="s3d_4"></div>'+
+        '<div class="s3d_d" id="s3d_5"></div><div class="s3d_d" id="s3d_6"></div><div class="s3d_d" id="s3d_7"></div><div class="s3d_d" id="s3d_8"></div><div class="s3d_d" id="s3d_9"></div><div class="s3d_d" id="s3d_10"></div>'+
+        '</div><div class="lastword" id="word1">isLuo</div><div class="lastword" id="word2">我就是我 是颜色不一样的烟火</div><div class="lastword" id="word3">欢迎访问我的世界</div><div class="lastword" id="word4">isluo.com</div>';
+	function returnInit(){
+		$("#box3d_a").removeClass("l_transition2");
+		$("#l_gbr").removeClass("l_transition05");
+		$("#l_gbl").removeClass("l_transition05");
+		$("#box").css("display","none");
+		
+		setTimeout(function(){
+			$("#box3d_a").css({"transform":"rotateX(-5deg) rotateY(10deg) translateZ(150px)","-webkit-transform":"rotateX(-5deg) rotateY(10deg) translateZ(150px)","opacity":"0"});
+			$("#l_gbr").css({"-webkit-transform":"rotate(-45deg) translate(37px,95px)","transform":"rotate(-45deg) translate(37px,95px)"});
+			$("#l_gbl").css({"-webkit-transform":"rotate(-45deg) translate(-109px,65px)","transform":"rotate(-45deg) translate(-109px,65px)"});
+			$("#box").html(returninith);
+			setTimeout(function(){
+				$("#box3d").fadeIn(0);
+				$("#box3d_a").addClass("l_transition2");
+				$("#l_gbr").addClass("l_transition05");
+				$("#l_gbl").addClass("l_transition05");
+				pageShow();
+			},16);
+		},16);
+	}
+	
+	
+	
+	

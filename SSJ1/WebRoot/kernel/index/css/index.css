@@ -64,6 +64,17 @@
 	.ybox_media{
 		width:100%;
 	}
+	.page3_list_media{
+		right:.5em;
+		width:12em;
+	}
+	.p3_baner_media{
+		width:9em;
+		height:2em;
+		line-height:2em;
+		margin-bottom:.2em;
+		font-size:.8em;
+	}
 }
 
 @media all and (min-width:769px)
@@ -129,6 +140,17 @@
 	}
 	.ybox_media{
 		width:49%;
+	}
+	.page3_list_media{
+		right:2em;
+		width:16em;
+	}
+	.p3_baner_media{
+		width:12em;
+		height:3em;
+		line-height:3em;
+		margin-bottom:.5em;
+		font-size:1em;
 	}
 }
 
@@ -785,7 +807,7 @@ p{
 .movieinfo_img{
 	width:80%;
 	margin-left:10%;
-	border-radius:.3em;
+	border-radius:.5em;
 }
 .movieinfo_div{
 	padding:1em;
@@ -806,6 +828,7 @@ p{
 	width:98%;
 	margin-left:1%;	
 	margin-bottom:5px;
+	border-radius:.5em;
 }
 .movieinfo_name{
 	width:80%;
@@ -926,6 +949,17 @@ p{
 	word-break:break-all;
 　　word-wrap:break-word;
 }
+.w_p{
+	text-indent:2em;
+	color:#333;
+	font-size:1em;
+}
+.w_img{
+	width:70%;
+	margin-left:15%;
+	margin-top:.5em;
+	margin-bottom:.5em;
+}
 .wenzhang_photo{
 	position:relative;
 	width:10em;
@@ -1031,22 +1065,16 @@ p{
 }
 .page3_list{
 	position:absolute;
-	width:16em;
 	height:60%;
 	top:20%;
-	right:2em;
 	overflow-y:auto;
 	overflow-x:hidden;
 }
 .p3_banner{
-	width:12em;
-	height:3em;
-	line-height:3em;
 	border:solid 1px #CCC;
 	box-shadow:0 0 2px #FFF;
 	color:#fff;
 	text-align:center;
-	margin-bottom:.5em;
 	
 	transition:background-color 300ms,box-shadow 300ms;
 	-webkit-transition:background-color 300ms,box-shadow 300ms;
@@ -1075,6 +1103,11 @@ p{
 	top:100%;
 	background-size:cover;
 	background-position: center;
+	border-radius:.5em;
+	opacity:.9;
+}
+.p3_bigimg:hover{
+	opacity:1;
 }
 .page3_word{
 	position:absolute;
@@ -1093,7 +1126,9 @@ p{
 	top:100%;
 	width:100%;
 	height:100%;
-	font-weight:bold;
+
+	color:#efefef;
+	text-shadow:0 0 5px #333;
 }
 .mywork{
 	position:absolute;
@@ -1101,7 +1136,7 @@ p{
 	left:0;
 	width:0;
 	height:0;
-	background-color:#efefef;
+	background-color:#eee;
 	overflow-Y:auto;
 	z-index:999;
 	display:none;
@@ -1114,6 +1149,7 @@ p{
 	left:2%;
 	margin-top:.5em;	
 	margin-bottom:.5em;
+	border-radius:.5em;
 }
 .mywork_info2{
 	width:96%;
@@ -1121,7 +1157,7 @@ p{
 	left:2%;
 	margin-top:.25em;
 	margin-bottom:.25em;
-	color:#ccc;
+	color:#999;
 	text-align:center;
 	font-size:2em;
 }

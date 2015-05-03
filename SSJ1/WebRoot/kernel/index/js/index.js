@@ -644,8 +644,12 @@ function gotoTheP3Img(num){
 
 //关闭具体的work页
 function closeWork(){
-	$("#mywork").animate({"top":"50%","left":"50%","width":"0","height":"0"},300);
-	$("#myworkbox").fadeOut(0);
+	$("#mywork").animate({"top":"50%","height":"0"},600,function(){
+		$("#mywork").css({"width":"0"});
+		$("#myworkbox").css("display","none");
+		
+	});
+	
 }
 
 //显示窗口提示
@@ -791,7 +795,7 @@ function getMovieListBack(data){
 	}else{
 		var str = "";
 		for(var i=0;i<json.list.length;i++){
-			str += moviehtml.replace(/@img@/g,json.list[i].imgpath).replace(/@id@/g,json.list[i].id);
+			str += moviehtml.replace(/@img@/g,baseip+json.list[i].imgpath).replace(/@id@/g,json.list[i].id);
 		}
 
 		$(str).insertBefore($m);
@@ -825,7 +829,7 @@ function getMovieInfoBack(data){
 	for(var i=0;i<json.list[0].movieimgs.length;i++){
 		str+=imghtml.replace(/@imgpath@/g,baseip+json.list[0].movieimgs[i].imgpath);
 	}
-	$("#movieinfo_jz").append($(str));
+	$("#movieinfo_jz").html('<span class="movieinfo_span1">剧照：</span><br/>'+str);
 	
 	 setTimeout(function(){
     	$(".load_img","#movielr").LoadImage();
@@ -839,7 +843,7 @@ function getGameListBack(data){
 	var thehtml = '<div class="game_i articlelist articlelist_media l_cursor opacitytran" style="background-image:url(@imgpath@)" onClick="gameOpen(@id@)"><div class="article_info1"><span class="ar_info1">@name@</span></div></div>';
     var str = "";           	
     for(var i=0;i<json.list.length;i++){
-    	str+=thehtml.replace(/@id@/g,json.list[i].id).replace(/@name@/g,json.list[i].name).replace(/@imgpath@/g,json.list[i].imgpath);
+    	str+=thehtml.replace(/@id@/g,json.list[i].id).replace(/@name@/g,json.list[i].name).replace(/@imgpath@/g,baseip+json.list[i].imgpath);
     }
     
     $(".iload","#p2_game").css("display","none");
@@ -919,10 +923,10 @@ function gameOpenBack(data){
 function getArticleListBack(data){
 	var json = JSON.parse(data);
 
-	var ahtml = '<div class="articlelist articlelist_media l_cursor opacitytran" onClick="wenzhangOpen(@id@)"><div class="article_info1"><span class="ar_info1">@title@</span><span class="ar_info2">作者：@aur@</span></div></div>';
+	var ahtml = '<div class="articlelist articlelist_media l_cursor opacitytran" style="background-image:url(@imgpath@)" onClick="wenzhangOpen(@id@)"><div class="article_info1"><span class="ar_info1">@title@</span><span class="ar_info2">作者：@aur@</span></div></div>';
 	var str="";
 	for(var i=0;i<json.list.length;i++){
-		str+=ahtml.replace(/@id@/g,json.list[i].id).replace(/@title@/g,json.list[i].title).replace(/@aur@/g,json.list[0].author);
+		str+=ahtml.replace(/@id@/g,json.list[i].id).replace(/@title@/g,json.list[i].title).replace(/@aur@/g,json.list[i].author).replace(/@imgpath@/g,baseip+json.list[i].imgpath);
 	}
 	
 	$(".iload","#p2_article").css("display","none");
@@ -966,9 +970,10 @@ function getOneArticleBack(data){
 	$("#w_title").text(json.list[0].title);
 	$("#w_autor").text("————"+json.list[0].author);
 	$("#w_body").html(json.list[0].articlebody);
-	$("#wenzhang_photo").attr("src",json.list[0].photo);
+	$("#wenzhang_photo").attr("src",baseip+json.list[0].photo);
 	$("#w_autor2").text(json.list[0].author);
 	$("#w_autorinfo").text(json.list[0].intr);
+	$("#w_img").attr("src",baseip+json.list[0].imgpath);
 	
 	$(".iload","#wenzhang").css("display","none");
 	$("#wenzhangl,#wenzhangr").fadeIn(300);
@@ -990,16 +995,16 @@ function getAllWorks(){
 //获取第3页我的工作列表回调函数
 function getAllWorksBack(data){
 	var json = JSON.parse(data);
-	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg l_cursor" data-num="@num@" onClick="openWork(event,@id@)" style="background-image:url(@imgpath@)"></div>';
+	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg opacitytran l_cursor" data-num="@num@" onClick="openWork(event,@id@)" style="background-image:url(@imgpath@)"></div>';
 	var bigword = '<div id="bigword_@num@" class="p3_word l_nowarp">@titleinfo@</div>';
-	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
+	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner p3_baner_media l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
 	
 	var str1="";
 	var str2="";
 	var str3="";
 	var j=1;
 	for(var i=0;i<json.list.length;i++){
-		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id).replace(/@imgpath@/g,json.list[i].imgpath);
+		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id).replace(/@imgpath@/g,baseip+json.list[i].imgpath);
 		str2+=bigword.replace(/@num@/g,j).replace(/@titleinfo@/g,json.list[i].titleinfo);
 		str3+=bigbtn.replace(/@num@/g,j).replace(/@title@/g,json.list[i].title);
 		j++;
@@ -1024,7 +1029,7 @@ function openWork(e,id){
 	var y = e.pageY;
 	$("#mywork").css({"top":y+"px","left":x+"px","display":"block"}).stop().animate({"top":"0","left":"0","width":"100%","height":"100%"},500);
 	
-	if($("mywork_t").val()==id){
+	if($("#mywork_t").val()==id){
 		$("#myworkbox").fadeIn(300);
 		return;
 	}
@@ -1051,13 +1056,13 @@ function openWorkBack(data){
     var str = "";
     for(var i=0;i<json.list.length;i++){
     	if(json.list[i].imgpath){//有图片的显示图片
-    		str+=img.replace(/@imgpath@/g,json.list[i].imgpath);
+    		str+=img.replace(/@imgpath@/g,baseip+json.list[i].imgpath);
     	}else{//否则显示文字
     		str+=div.replace(/@info@/g,json.list[i].info);
     	}
     }
     $("#myworkbox").html(str);
-    
+    $("#mywork_t").val(json.list[0].mywork_id);
     $(".iload","#mywork").css("display","none");
     $("#myworkbox").fadeIn(300);
 
