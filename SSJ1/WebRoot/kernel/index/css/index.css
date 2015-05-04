@@ -1015,6 +1015,7 @@ p{
 	height:12em;
 	width:100%;
 	background-size:cover;
+	background-position:center;
 	color:#fefefe;
 	text-shadow:0 0 8px #ccc;
 	line-height:12em;

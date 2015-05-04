@@ -882,7 +882,7 @@ function gameOpen(id){
 function gameOpenBack(data){
 	var json = JSON.parse(data);
 	$("#yx_id").val(json.list[0].id);
-	$("#youxi_1").css("background-color",json.list[0].imgpath).text(json.list[0].name);
+	$("#youxi_1").css("background-image","url("+baseip+json.list[0].imgpath+")").text(json.list[0].name);
 	$("#yx_name").text(json.list[0].name);
 	$("#yx_type").text(json.list[0].type);
 	
