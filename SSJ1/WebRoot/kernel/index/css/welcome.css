@@ -307,11 +307,8 @@ body{
 	left:0;
 	z-index:1001;
 	
-			transform-style: preserve-3d;
-	-webkit-transform-style: preserve-3d;
-		-ms-transform-style:preserve-3d;
-
-	
+			transform-style:preserve-3d;
+	-webkit-transform-style:preserve-3d;
 }
 
 #words{

@@ -294,12 +294,13 @@ function show1(){
         '<div id="s3d"><div class="s3d_d" id="s3d_1"></div><div class="s3d_d" id="s3d_2"></div><div class="s3d_d" id="s3d_3"></div><div class="s3d_d" id="s3d_4"></div>'+
         '<div class="s3d_d" id="s3d_5"></div><div class="s3d_d" id="s3d_6"></div><div class="s3d_d" id="s3d_7"></div><div class="s3d_d" id="s3d_8"></div><div class="s3d_d" id="s3d_9"></div><div class="s3d_d" id="s3d_10"></div>'+
         '</div><div class="lastword" id="word1">isLuo</div><div class="lastword" id="word2">我就是我 是颜色不一样的烟火</div><div class="lastword" id="word3">欢迎访问我的世界</div><div class="lastword" id="word4">isluo.com</div>';
+	
 	function returnInit(){
 		$("#box3d_a").removeClass("l_transition2");
 		$("#l_gbr").removeClass("l_transition05");
 		$("#l_gbl").removeClass("l_transition05");
 		$("#box").css("display","none");
-		
+		$("#l_gbr_box,#l_gbl_box").css("opacity","0");
 		setTimeout(function(){
 			$("#box3d_a").css({"transform":"rotateX(-5deg) rotateY(10deg) translateZ(150px)","-webkit-transform":"rotateX(-5deg) rotateY(10deg) translateZ(150px)","opacity":"0"});
 			$("#l_gbr").css({"-webkit-transform":"rotate(-45deg) translate(37px,95px)","transform":"rotate(-45deg) translate(37px,95px)"});
@@ -310,7 +311,7 @@ function show1(){
 				$("#box3d_a").addClass("l_transition2");
 				$("#l_gbr").addClass("l_transition05");
 				$("#l_gbl").addClass("l_transition05");
-				pageShow();
+				setTimeout("pageShow()",16);
 			},16);
 		},16);
 	}
