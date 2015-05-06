@@ -65,14 +65,17 @@
 		width:100%;
 	}
 	.page3_list_media{
-		right:.5em;
-		width:12em;
+		right:0;
+		width:9em;
 	}
 	.p3_baner_media{
 		width:9em;
-		height:2em;
-		line-height:2em;
+		height:2.5em;
+		line-height:2.5em;
 		margin-bottom:.2em;
+		font-size:.8em;
+	}
+	.p3_word_media{
 		font-size:.8em;
 	}
 }
@@ -151,6 +154,9 @@
 		line-height:3em;
 		margin-bottom:.5em;
 		font-size:1em;
+	}
+	.p3_word_media{
+		font-size:1.5em;
 	}
 }
 
@@ -898,6 +904,7 @@ p{
 	margin-top:.2em;
 	
 	background-size:cover;
+	background-position:center;
 	opacity:.8;
 }
 .articlelist:hover{
@@ -1017,7 +1024,7 @@ p{
 	background-size:cover;
 	background-position:center;
 	color:#fefefe;
-	text-shadow:0 0 8px #ccc;
+	text-shadow:0 0 8px #999;
 	line-height:12em;
 	margin-top:20px;
 	opacity:0;

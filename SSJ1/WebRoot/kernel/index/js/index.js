@@ -778,6 +778,7 @@ var moviehtml = "<img src='@img@' class='movecard l_imgback reflex itiltnone idi
 //调用倒影插件的方法
 function initCanvas(the){
 	if(isIE){addIEReflex(the);}else {addReflex(the);}
+	$(".iload","#p2_movie").css("display","none");
 }
 
 //获取电影列表的回调函数
@@ -791,7 +792,7 @@ function getMovieListBack(data){
 		$m.css("display","inline-block");
 	}
 	if(json.list.length<=0){	//没有更多了
-		
+		$(".iload","#p2_movie").css("display","none");
 	}else{
 		var str = "";
 		for(var i=0;i<json.list.length;i++){
@@ -996,7 +997,7 @@ function getAllWorks(){
 function getAllWorksBack(data){
 	var json = JSON.parse(data);
 	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg opacitytran l_cursor" data-num="@num@" onClick="openWork(event,@id@)" style="background-image:url(@imgpath@)"></div>';
-	var bigword = '<div id="bigword_@num@" class="p3_word l_nowarp">@titleinfo@</div>';
+	var bigword = '<div id="bigword_@num@" class="p3_word p3_word_media l_nowarp">@titleinfo@</div>';
 	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner p3_baner_media l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
 	
 	var str1="";
