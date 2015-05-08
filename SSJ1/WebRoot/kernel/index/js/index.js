@@ -552,7 +552,7 @@ function movieloadmore(){
 
 //禁止某些部件上的滚轮事件
 function noScroll(){
-	$("#movedh,#movielr,#wenzhang,#articlebox,#youxi,#page3_list,#mywork").on("mousewheel",function(e,data){
+	$("#movedh,#movielr,#wenzhang,#articlebox,#youxi,#page3_list,#mywork,#gamebox").on("mousewheel",function(e,data){
 		e.stopPropagation();
 	});
 }
@@ -997,7 +997,7 @@ function getAllWorks(){
 function getAllWorksBack(data){
 	var json = JSON.parse(data);
 	var bigimg = '<div id="bigimg_@num@" class="p3_bigimg opacitytran l_cursor" data-num="@num@" onClick="openWork(event,@id@)" style="background-image:url(@imgpath@)"></div>';
-	var bigword = '<div id="bigword_@num@" class="p3_word p3_word_media l_nowarp">@titleinfo@</div>';
+	var bigword = '<div id="bigword_@num@" class="p3_word p3_word_media l_nowarp l_cursor" onClick="openWork(event,@id@)">@titleinfo@</div>';
 	var bigbtn = '<div id="bigbtn_@num@" class="p3_banner p3_baner_media l_cursor" onClick="gotoTheP3Img(@num@)">@title@</div>';
 	
 	var str1="";
@@ -1006,7 +1006,7 @@ function getAllWorksBack(data){
 	var j=1;
 	for(var i=0;i<json.list.length;i++){
 		str1+=bigimg.replace(/@num@/g,j).replace(/@id@/g,json.list[i].id).replace(/@imgpath@/g,baseip+json.list[i].imgpath);
-		str2+=bigword.replace(/@num@/g,j).replace(/@titleinfo@/g,json.list[i].titleinfo);
+		str2+=bigword.replace(/@num@/g,j).replace(/@titleinfo@/g,json.list[i].titleinfo).replace(/@id@/g,json.list[i].id);
 		str3+=bigbtn.replace(/@num@/g,j).replace(/@title@/g,json.list[i].title);
 		j++;
 	}
