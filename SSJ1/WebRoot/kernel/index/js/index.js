@@ -1,4 +1,4 @@
-var baseip = "http://localhost:8080/SSJ1";
+var baseip = "http://120.24.86.115:8080";
 var nowpage = 0;				//记录当前位置在第几页，用于在当前页时，点击导航不重复触发滑动动画
 var lastRunTime = new Date();	//防止滚轮事件重复触发
 var pageimgnum = 2;				//page1图片轮播的下一张图片的编号
