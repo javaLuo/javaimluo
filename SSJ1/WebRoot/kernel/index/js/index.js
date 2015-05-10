@@ -807,7 +807,7 @@ function getMovieListBack(data){
 //获取具体的电影信息
 function getMovieInfoBack(data){
 	var json = JSON.parse(data);
-	
+	$("#movielr").mCustomScrollbar("scrollTo","top",{scrollInertia:0});
 	$("#movieinfo_id").val(json.list[0].id);						//ID
 	$("#movieinfo_img").data("src",baseip+json.list[0].imgpath)
 						.attr("src","kernel/loadimg/wright.png")

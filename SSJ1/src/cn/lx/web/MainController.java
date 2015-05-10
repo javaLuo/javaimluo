@@ -103,6 +103,7 @@ public class MainController
 	 */
 	private String putMessage(String parameters) throws UnsupportedEncodingException {
 		//s[0]Ãû×Ö¡¢s[1]ÄÚÈÝ
+
 		String p = URLDecoder.decode(parameters,"UTF-8");
 		String[] s = p.split(AppConfig.PAT);
 		System.out.println(s[0]+","+s[1]);
@@ -116,7 +117,7 @@ public class MainController
 		msg.setList(l);
 		
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		System.out.println("22222222222222222222222222222:"+json);
 		return json;
 	}
 	

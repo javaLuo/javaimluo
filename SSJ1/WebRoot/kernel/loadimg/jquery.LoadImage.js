@@ -19,7 +19,7 @@ jQuery.fn.LoadImage=function(animatechose){
 		img.onload = function(){
 			img.onload = null;
 			t.removeClass("load_img");
-			t.css({"opacity":"0"}).attr("src",img.src);
+			t.css({"opacity":"0","background-image":"none"}).attr("src",img.src);
 			animates(t,animatechose?animatechose:1);
 			img = null;
 			
@@ -37,7 +37,7 @@ jQuery.fn.LoadImage=function(animatechose){
 		if(img.complete){
 			img.onload = null;
 			t.removeClass("load_img");
-			t.css({"opacity":"0"}).attr("src",img.src);
+			t.css({"opacity":"0","background-image":"none"}).attr("src",img.src);
 			animates(t,animatechose?animatechose:1);
 			img = null;
 		    return;
