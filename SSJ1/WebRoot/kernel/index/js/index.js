@@ -73,7 +73,7 @@ window.onload = function(){
 	$("#lit_allfaces img").css("cursor","pointer").on("click",function(){faceChose(this)});
 	
 	//绑定page2导航按钮点击事件
-	$("#p2_dh_btn").on("click",p2dhTarger);
+	$("#p2_dh_btn0").on("click",p2dhTarger);
 	
 	//初始化页面中的所有滚动条
 	initScrollbar("movedh");
