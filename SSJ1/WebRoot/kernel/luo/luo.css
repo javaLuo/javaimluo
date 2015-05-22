@@ -338,6 +338,16 @@ div{
 	text-decoration:underline;
 }
 
+.l_a3{
+	border:none;
+	color:#999;
+	text-decoration:none;
+}
+.l_a3:hover{
+	color:#999;
+	text-decoration:underline;
+}
+
 .l_nowarp{/* 禁止换行 */
 	white-space:nowrap;
 	overflow:hidden;

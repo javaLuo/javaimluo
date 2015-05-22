@@ -24,7 +24,8 @@ window.onload = function(){
 function ltie9(){
 	if(!l_checkBrowser()){
 		$(".l_curtain").fadeIn(0);
-		$("#checkrower").css("top","50%").animate({"top":"30%","opacity":"show"},300);
+		 var s = '<span class="l_font120">您的古董级浏览器不适合访问本网站,建议使用以下现代先进浏览器：</span><br/><br/><a class="browser browser1 l_textcenter l_font70" href="http://rj.baidu.com/soft/detail/14744.html" title="谷歌浏览器" target="_blank"><img src="kernel/index/img/welcome/browser1.jpg" alt="谷歌浏览器"/></a><a class="browser l_textcenter l_font70" href="http://rj.baidu.com/soft/detail/23360.html" title="IE10+" target="_blank"><img src="kernel/index/img/welcome/browser2.jpg" alt="IE10+"/></a><a class="browser l_textcenter l_font70" href="http://ie.sogou.com/" title="搜狗浏览器" target="_blank"><img src="kernel/index/img/welcome/browser3.jpg" alt="搜狗浏览器"/></a><a class="browser l_textcenter l_font70" href="http://chrome.360.cn/" title="360极速浏览器" target="_blank"><img src="kernel/index/img/welcome/browser4.jpg" alt="360极速浏览器"/></a>';
+		$("#checkrower").append($(s)).css("top","50%").animate({"top":"30%","opacity":"show"},300);
 		return true;
 		}
 	else{
