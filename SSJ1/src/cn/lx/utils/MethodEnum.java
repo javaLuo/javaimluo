@@ -27,7 +27,7 @@ public enum MethodEnum {
 	getAllWorks,
 	//获取我的工作详细信息
 	getOneMyWork,
-	
+
 	test;
 
 	public static MethodEnum getMethod(String methodCode) {

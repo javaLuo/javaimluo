@@ -59,9 +59,7 @@ public class MainController
 			@RequestParam(value = "p", required = false) String p,
 			HttpSession session, HttpServletRequest request){
 		try {
-				System.out.println("------------------------------------------------------------");
-				System.out.println("methodCode:" + m + "     parameters :" + p);
-				System.out.println("------------------------------------------------------------");
+			System.out.println("methodCode:" + m + "     parameters :" + p);
 
 			switch (MethodEnum.getMethod(m)) {
 				case putMessage://发表留言
@@ -103,9 +101,9 @@ public class MainController
 	 */
 	private String putMessage(String parameters) throws UnsupportedEncodingException {
 		//s[0]名字、s[1]内容
+
 		String p = URLDecoder.decode(parameters,"UTF-8");
 		String[] s = p.split(AppConfig.PAT);
-		System.out.println(s[0]+","+s[1]);
 		
 		ReturnMsg<Message> msg = new ReturnMsg<Message>();
 		Message m = messageservice.putMessage(s[0],s[1]);
@@ -116,7 +114,7 @@ public class MainController
 		msg.setList(l);
 		
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -132,7 +130,7 @@ public class MainController
 		msg.setCode(AppConfig.OK_STATUS);
 		msg.setList(l);
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -146,7 +144,7 @@ public class MainController
 		msg.setCode(AppConfig.OK_STATUS);
 		msg.setList(l);
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -163,7 +161,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -178,7 +176,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -194,7 +192,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -209,7 +207,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -225,7 +223,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -240,7 +238,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 	
@@ -256,7 +254,7 @@ public class MainController
 		msg.setList(m);
 
 		String json = Json.toJson(msg, JsonFormat.compact());
-		System.out.println(json);
+		//System.out.println(json);
 		return json;
 	}
 }

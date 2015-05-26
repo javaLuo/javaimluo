@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "MESSAGE")
+@Entity(name = "message")
 public class Message
 {
 	//ID
