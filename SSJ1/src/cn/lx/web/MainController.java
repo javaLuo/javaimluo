@@ -61,6 +61,11 @@ public class MainController
 		try {
 			System.out.println("methodCode:" + m + "     parameters :" + p);
 
+			if("GET".equals(request.getMethod()))return null;
+			String referer = request.getHeader("Referer");
+			//System.out.println("host="+referer);
+			if(!("http://www.isluo.com/index.html".equals(referer) || "http://isluo.com/index.html".equals(referer) || "http://120.24.86.115/index.html".equals(referer)))return null;
+			
 			switch (MethodEnum.getMethod(m)) {
 				case putMessage://∑¢±Ì¡Ù—‘
 					return putMessage(p);
