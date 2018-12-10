@@ -1,4 +1,5 @@
-# javaimluo
-项目imluo
+**这个项目仅用于我的个人博客评论的存储点**
 
-isluo 后台
+https://blog.isluo.com
+
+目前使用gitalk
